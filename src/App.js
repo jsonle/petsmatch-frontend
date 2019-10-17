@@ -1,16 +1,16 @@
 import React from 'react';
-import Navbar from '../containers/Navbar';
-import HomeContainer from '../containers/HomeContainer';
-import BrowseContainer from '../containers/BrowseContainer';
-import ProfileContainer from '../containers/ProfileContainer';
-import SignUpContainer from '../containers/SignUpContainer';
-import ChatContainer from '../containers/ChatContainer';
+import Navbar from './containers/Navbar';
+import HomeContainer from './containers/HomeContainer';
+import BrowseContainer from './containers/BrowseContainer';
+import ProfileContainer from './containers/ProfileContainer';
+import SignUpContainer from './containers/SignUpContainer';
+import ChatContainer from './containers/ChatContainer';
 import { BrowserRouter as Router,
   Switch,
   Route,
   Link } from 'react-router-dom';
 
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
