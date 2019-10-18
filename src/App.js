@@ -12,31 +12,61 @@ import { BrowserRouter as Router,
 
 import './App.scss';
 
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <Switch>
-          <Route exact path="/">
-            <HomeContainer />
-          </Route>
-          <Route exact path="/profile">
-            <ProfileContainer />
-          </Route>
-          <Route exact path="/chat/:user_id">
-            <ChatContainer />
-          </Route>
-          <Route exact path="/signup">
-            <SignUpContainer />
-          </Route>
-          <Route exact path="/browse">
-            <BrowseContainer />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  );
+class App extends React.Component {
+  state = {
+    currentUser: {}
+  }
+
+  onLoginSubmit = (formData) => {
+
+    let configObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        "auth": {
+          "username": formData.username,
+          "password": formData.password
+        }
+      })
+    }
+
+    fetch('http://localhost:3000/user_token', configObj)
+    .then(response => response.json())
+    .then(response => {
+      console.log(response);
+    })
+
+  }
+
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <Navbar onLoginSubmit={this.onLoginSubmit}/>
+          <Switch>
+            <Route exact path="/">
+              <HomeContainer />
+            </Route>
+            <Route exact path="/profile">
+              <ProfileContainer />
+            </Route>
+            <Route exact path="/chat/:user_id">
+              <ChatContainer />
+            </Route>
+            <Route exact path="/signup">
+              <SignUpContainer />
+            </Route>
+            <Route exact path="/browse">
+              <BrowseContainer />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    )
+  }
 }
 
 export default App;
