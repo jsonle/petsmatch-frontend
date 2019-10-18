@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import socketIOClient from "socket.io-client";
+import ChatList from '../components/ChatList'
 import { nullLiteral } from '@babel/types';
 import { resolveNaptr } from 'dns';
 var axios = require('axios');
-
 
 class ChatContainer extends Component {
     constructor() {
         super();
         this.state = {
+            showMatches: false,
+            myMatches: [],
             chatList: [],
             response: false,
             endpoint: "http://127.0.0.1:8000",
@@ -41,19 +43,11 @@ class ChatContainer extends Component {
                 currentDisplayedChat: {
                     messages: [...this.state.currentDisplayedChat.messages, data]}
             })
-            // this.setState({ response: data })
         })
     }    
     
     sendChatMessage = (socket, event) => {
         event.preventDefault()
-        // try {
-        //   const response = await axios.get("http://localhost:3000/chats/4")
-        //   socket.emit("chatMessage", response.data.id);
-        // } catch (error) {
-        //   console.error(`Error: ${error.code}`);
-        // }
-        // console.log('button state', this.state)
         fetch('http://localhost:3000/messages', {
             method: 'POST',
             headers: {
@@ -65,10 +59,7 @@ class ChatContainer extends Component {
         .then(data => {
             socket.emit("sendMessage", data);
         })
-
-        
       };
-
 
     handleMessageInputChange = (event) => {
         this.setState({
@@ -82,9 +73,7 @@ class ChatContainer extends Component {
     renderChatList = () => {
         return this.state.chatList.map( (chat, key) => {
             return(
-                <li onClick={() => this.fetchChatMessages(chat.id)}>
-                    {chat.user_one.name}/{chat.user_two.name}
-                </li>
+                <ChatList key={key} chat={chat} fetchChatMessages={this.fetchChatMessages} />
             )
         })
     }
@@ -108,18 +97,42 @@ class ChatContainer extends Component {
     renderChatMessages = () => {
         return this.state.currentDisplayedChat.messages.map( (message, key) => {
             return (
-                <li>
+                <li key={key}>
                     {message.text}
                 </li>
             )
         })
     }
 
+    getMatches = () => {
+        fetch(`http://localhost:3000/matches/${this.state.currentMessage.user_id}`)
+        .then(resp => resp.json())
+        .then(data => {
+            this.setState({
+                showMatches: true,
+                myMatches: data
+            })
+        })
+    }
+
+    renderMatches = () => {
+        return (
+            <div>
+                <ul>
+                    {this.state.myMatches.map( (match, key) => <li key={key}>{match.user_one.name}/{match.user_two.name}</li>)}
+                </ul>
+            </div>
+        )
+    }
+
     divStyle = {
         float: 'left',
         border: '5px solid black',
-        width: '40%',
-        margin: '50px'
+        width: '35%',
+        margin: '50px',
+        height: '400px',
+        overflow: 'scroll',
+        padding: '5px'
     };
 
     formStyle = {
@@ -128,7 +141,6 @@ class ChatContainer extends Component {
         bottom: '25%'
     }
     
-
     render() { 
         const socket = socketIOClient(this.state.endpoint);
         console.log('state',this.state)
@@ -140,6 +152,9 @@ class ChatContainer extends Component {
                     <ul>
                         {this.renderChatList()}
                     </ul>
+                    <div>
+                        <button onClick={() => this.getMatches()}>Start a Chat</button>
+                    </div>
                 </div>
                 <div id='chat-window'>
                     <div id='incoming-messages' style={this.divStyle}>
@@ -148,6 +163,7 @@ class ChatContainer extends Component {
                         </ul>
                     </div>
                     <br></br>
+                    {this.state.showMatches && this.renderMatches()}
                     <form style={this.formStyle} onSubmit={(e) => {this.sendChatMessage(socket, e)}}>
                         <input type='text' onChange={(event) => this.handleMessageInputChange(event)} value={this.state.currentMessage.text}></input><input type='submit'></input>
                     </form>
