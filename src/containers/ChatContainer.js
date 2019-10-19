@@ -3,7 +3,10 @@ import socketIOClient from "socket.io-client";
 import ChatList from '../components/ChatList'
 import { nullLiteral } from '@babel/types';
 import { resolveNaptr } from 'dns';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col'
 var axios = require('axios');
+
 
 class ChatContainer extends Component {
     constructor() {
@@ -72,8 +75,14 @@ class ChatContainer extends Component {
 
     renderChatList = () => {
         return this.state.chatList.map( (chat, key) => {
+            console.log(chat)
+            if(chat.user_one.id === this.state.currentMessage.user_id) {
+                var otherUser = chat.user_two;
+            } else {
+                var otherUser = chat.user_one
+            }
             return(
-                <ChatList key={key} chat={chat} fetchChatMessages={this.fetchChatMessages} />
+                <ChatList key={key} otherUser={otherUser} fetchChatMessages={this.fetchChatMessages} />
             )
         })
     }
@@ -115,24 +124,35 @@ class ChatContainer extends Component {
         })
     }
 
+    createNewChatFromMatchClick = (key) => {
+        fetch('http://localhost:3000/chats', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                match_id: key
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data)
+        })
+    }
+
     renderMatches = () => {
         return (
             <div>
                 <ul>
-                    {this.state.myMatches.map( (match, key) => <li key={key}>{match.user_one.name}/{match.user_two.name}</li>)}
+                    {this.state.myMatches.map( (match, key) => <li key={key} onClick={ () => this.createNewChatFromMatchClick(key)}>{match.user_one.name}/{match.user_two.name}</li>)}
                 </ul>
             </div>
         )
     }
 
     divStyle = {
-        float: 'left',
-        border: '5px solid black',
-        width: '35%',
-        margin: '50px',
         height: '400px',
         overflow: 'scroll',
-        padding: '5px'
     };
 
     formStyle = {
@@ -145,30 +165,30 @@ class ChatContainer extends Component {
         const socket = socketIOClient(this.state.endpoint);
         console.log('state',this.state)
         return ( 
-            <div>
-                This is the ChatContainer
+            <Row>
                 <br></br>
-                <div style={this.divStyle}>
-                    <ul>
-                        {this.renderChatList()}
-                    </ul>
+                <Col lg={4}>
+                    <div>
+                        {this.state.showMatches ? <div>{this.renderMatches()}</div> : <ul>{this.renderChatList()}</ul>}
+                    </div>
                     <div>
                         <button onClick={() => this.getMatches()}>Start a Chat</button>
                     </div>
-                </div>
-                <div id='chat-window'>
-                    <div id='incoming-messages' style={this.divStyle}>
+                </Col>
+                <Col id='chat-window'>
+                    <div id='incoming-messages'>
                         <ul>
                             {this.renderChatMessages()}
                         </ul>
+                        <form onSubmit={(e) => {this.sendChatMessage(socket, e)}}>
+                            <input type='text' onChange={(event) => this.handleMessageInputChange(event)} value={this.state.currentMessage.text}></input><input type='submit'></input>
+                        </form>
                     </div>
                     <br></br>
-                    {this.state.showMatches && this.renderMatches()}
-                    <form style={this.formStyle} onSubmit={(e) => {this.sendChatMessage(socket, e)}}>
-                        <input type='text' onChange={(event) => this.handleMessageInputChange(event)} value={this.state.currentMessage.text}></input><input type='submit'></input>
-                    </form>
-                </div>
-            </div>
+                    
+
+                </Col>
+            </Row>
         );
     }
 }
