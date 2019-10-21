@@ -1,13 +1,19 @@
 import React from 'react';
 import { Dropdown, DropdownButton} from 'react-bootstrap'
-import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const UserMenu = ({ currentUser, handleLogout }) => {
     return (
         <DropdownButton id="dropdown-basic-button" title={currentUser.name}>
-            <Dropdown.Item tag={Link} to="/profile">View Profile</Dropdown.Item>
-            <Dropdown.Item tag={Link} to="/browse">Browse</Dropdown.Item>
-            <Dropdown.Item tag={Link} to={`/chat/${currentUser.id}`}>Chat</Dropdown.Item>
+            <LinkContainer to="/profile">
+                <Dropdown.Item>View Profile</Dropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/browse">
+                <Dropdown.Item>Browse</Dropdown.Item>
+            </LinkContainer>
+            <LinkContainer to={`/chat/${currentUser.id}`}>
+                <Dropdown.Item >Chat</Dropdown.Item>
+            </LinkContainer>
             <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
         </DropdownButton>
     )

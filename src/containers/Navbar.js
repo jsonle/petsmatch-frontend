@@ -20,6 +20,7 @@ class Navbar extends Component {
         this.props.onLoginSubmit(this.state);
     }
     render() { 
+        console.log(this.props.currentUser)
         return ( 
             <div className="navbar navbar-light bg-primary">
                 Petsmatch
