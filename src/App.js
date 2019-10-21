@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './containers/Navbar';
+import NavbarContainer from './containers/NavbarContainer';
 import HomeContainer from './containers/HomeContainer';
 import BrowseContainer from './containers/BrowseContainer';
 import ProfileContainer from './containers/ProfileContainer';
@@ -14,7 +14,7 @@ import './App.scss';
 
 class App extends React.Component {
   state = {
-    currentUser: {}
+    currentUser: null
   }
 
   onLoginSubmit = (formData) => {
@@ -44,11 +44,18 @@ class App extends React.Component {
     })
   }
 
+  handleLogout = () => {
+    localStorage.removeItem("jwt");
+    this.setState({
+      currentUser: null
+    })
+  }
+
   render() {
     return (
       <Router>
         <div className="App">
-          <Navbar onLoginSubmit={this.onLoginSubmit} currentUser={this.state.currentUser}/>
+          <NavbarContainer onLoginSubmit={this.onLoginSubmit} currentUser={this.state.currentUser} handleLogout={this.handleLogout}/>
           <Switch>
             <Route exact path="/">
               <HomeContainer />

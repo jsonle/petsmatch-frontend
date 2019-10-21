@@ -33,7 +33,11 @@ class ChatContainer extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:3000/chats')
+        fetch('http://localhost:3000/chats', {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+            }
+        })
         .then(resp => resp.json())
         .then(data => {
             this.setState({
@@ -57,7 +61,8 @@ class ChatContainer extends Component {
         fetch('http://localhost:3000/messages', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt")
             },
             body: JSON.stringify(this.state.currentMessage)
         })
@@ -117,7 +122,11 @@ class ChatContainer extends Component {
     };
 
     fetchMatches = () => {
-        fetch(`http://localhost:3000/matches/${this.state.currentMessage.user_id}`)
+        fetch(`http://localhost:3000/matches/${this.state.currentMessage.user_id}`, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+            }
+        })
         .then(resp => resp.json())
         .then(data => {
             this.setState({
@@ -132,6 +141,7 @@ class ChatContainer extends Component {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt")
             },
             body: JSON.stringify({match_id: key}),
         })
