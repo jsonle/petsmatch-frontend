@@ -9,12 +9,12 @@ import { BrowserRouter as Router,
   Switch,
   Route,
   Link } from 'react-router-dom';
-
 import './App.scss';
 
 class App extends React.Component {
   state = {
-    currentUser: {}
+    currentUser: {},
+    baseUrl: 'http://localhost:3000/'
   }
 
   onLoginSubmit = (formData) => {
@@ -53,13 +53,13 @@ class App extends React.Component {
               <ProfileContainer />
             </Route>
             <Route exact path="/chat/:user_id">
-              <ChatContainer />
+              <ChatContainer baseUrl={this.state.baseUrl} />
             </Route>
             <Route exact path="/signup">
               <SignUpContainer />
             </Route>
             <Route exact path="/browse">
-              <BrowseContainer />
+                <BrowseContainer baseUrl={this.state.baseUrl} />
             </Route>
           </Switch>
         </div>
