@@ -42,7 +42,6 @@ class App extends React.Component {
         currentUser: response.user
       })
     })
-
   }
 
   render() {

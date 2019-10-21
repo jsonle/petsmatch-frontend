@@ -3,7 +3,14 @@ import socketIOClient from "socket.io-client";
 import ChatList from '../components/ChatList'
 import { nullLiteral } from '@babel/types';
 import { resolveNaptr } from 'dns';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { MDBListGroup, MDBListGroupItem, MDBContainer, MDBBadge } from "mdbreact";
+import MessagesContainer from './MessagesContainer';
 var axios = require('axios');
+const endpoint = "http://127.0.0.1:8000"
+const socket = socketIOClient(endpoint);
+
 
 class ChatContainer extends Component {
     constructor() {
@@ -26,9 +33,6 @@ class ChatContainer extends Component {
     }
 
     componentDidMount() {
-        const { endpoint } = this.state;
-        const socket = socketIOClient(endpoint);
-
         fetch('http://localhost:3000/chats')
         .then(resp => resp.json())
         .then(data => {
@@ -36,14 +40,16 @@ class ChatContainer extends Component {
                 chatList: data
             })
         })
-
-        socket.on("receiveMessage", data => {
-            console.log(data)
-            this.setState({
-                currentDisplayedChat: {
-                    messages: [...this.state.currentDisplayedChat.messages, data]}
+        .then( () => {
+            socket.on('connect', () => {
             })
-        })
+            socket.on("receiveMessage", data => {
+                this.setState({
+                    currentDisplayedChat: {
+                        messages: [...this.state.currentDisplayedChat.messages, data]}
+                })
+            })
+        });
     }    
     
     sendChatMessage = (socket, event) => {
@@ -58,8 +64,14 @@ class ChatContainer extends Component {
         .then(resp => resp.json())
         .then(data => {
             socket.emit("sendMessage", data);
-        })
-      };
+            this.setState({
+                currentMessage: {
+                    ...this.state.currentMessage,
+                    text: ''
+                } 
+            })
+        });
+    };
 
     handleMessageInputChange = (event) => {
         this.setState({
@@ -67,21 +79,27 @@ class ChatContainer extends Component {
                 ...this.state.currentMessage,
                 text: event.target.value
             } 
-        })
-    }
+        });
+    };
 
     renderChatList = () => {
         return this.state.chatList.map( (chat, key) => {
-            return(
-                <ChatList key={key} chat={chat} fetchChatMessages={this.fetchChatMessages} />
-            )
-        })
-    }
+            if(chat.user_one.id === this.state.currentMessage.user_id) {
+                var otherUser = chat.user_two;
+            } else if (chat.user_two.id === this.state.currentMessage.user_id) {
+                var otherUser = chat.user_one;
+            };
+            if(otherUser) {
+                return <ChatList key={key} otherUser={otherUser} chat={chat} fetchChatMessages={this.fetchChatMessages} />;
+            } 
+        });
+    };
 
     fetchChatMessages = (chat_id) => {
         fetch(`http://localhost:3000/chats/${chat_id}`)
         .then(resp => resp.json())
         .then(data => {
+            socket.emit('leave', `chat_id_${this.state.currentMessage.chat_id}`)
             this.setState({
                 currentDisplayedChat: {
                     messages: data.messages
@@ -90,85 +108,108 @@ class ChatContainer extends Component {
                     ...this.state.currentMessage,
                     chat_id: chat_id
                 }
-            })
+            });
         })
-    }
+        .then( () => {
+            socket.emit('room', `chat_id_${chat_id}`)
 
-    renderChatMessages = () => {
-        return this.state.currentDisplayedChat.messages.map( (message, key) => {
-            return (
-                <li key={key}>
-                    {message.text}
-                </li>
-            )
         })
-    }
+    };
 
-    getMatches = () => {
+    fetchMatches = () => {
         fetch(`http://localhost:3000/matches/${this.state.currentMessage.user_id}`)
         .then(resp => resp.json())
         .then(data => {
             this.setState({
                 showMatches: true,
                 myMatches: data
-            })
+            });
+        });
+    };
+
+    findOrCreateNewChatFromMatchClick = (key) => {
+        fetch('http://localhost:3000/chats', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({match_id: key}),
         })
+        .then(resp => resp.json())
+        .then(data => {
+            this.fetchChatMessages(data.id)
+        });
     }
 
     renderMatches = () => {
         return (
             <div>
-                <ul>
-                    {this.state.myMatches.map( (match, key) => <li key={key}>{match.user_one.name}/{match.user_two.name}</li>)}
-                </ul>
+                <MDBContainer className='pt-1 pl-1 pr-1'>
+                    <MDBListGroup style={{ width: "100%" }}>
+                        {this.state.myMatches.map( (match) => {
+                            if(match.user_one.id === this.state.currentMessage.user_id) {
+                                var otherUser = match.user_two;
+                            } else {
+                                var otherUser = match.user_one
+                            }
+                            return (
+                                <MDBListGroupItem key={match.id} onClick={ () => this.findOrCreateNewChatFromMatchClick(match.id)} hover>{otherUser.name}</MDBListGroupItem>
+                            )
+                        }
+                        )}
+                    </MDBListGroup>
+                </MDBContainer>
             </div>
         )
     }
 
-    divStyle = {
-        float: 'left',
-        border: '5px solid black',
-        width: '35%',
-        margin: '50px',
-        height: '400px',
-        overflow: 'scroll',
-        padding: '5px'
-    };
+    handleGoBack = () => {
+        this.setState({
+            showMatches: false
+        })
+    }
 
-    formStyle = {
-        position: 'fixed',
-        width: '100%',
-        bottom: '25%'
+    testChatUserTextAlign = (num) => {
+        this.setState({
+            currentMessage: {
+                ...this.state.currentMessage,
+                user_id: num
+            }
+        });
     }
     
     render() { 
         const socket = socketIOClient(this.state.endpoint);
-        console.log('state',this.state)
         return ( 
-            <div>
-                This is the ChatContainer
+            <Row className='h-75 mt-3 ml-3 mr-3'>
+                <h1>{this.state.currentMessage.user_id}</h1>
                 <br></br>
-                <div style={this.divStyle}>
-                    <ul>
-                        {this.renderChatList()}
-                    </ul>
-                    <div>
-                        <button onClick={() => this.getMatches()}>Start a Chat</button>
+                <button onClick={() => this.testChatUserTextAlign(2)}>Test User 2</button>
+                <button onClick={() => this.testChatUserTextAlign(4)}>Test User 4</button>
+                <Col lg={4}>
+                    <div className='h-75 border border-dark pt-1 pl-1 pr-1'>
+                        {this.state.showMatches ? <div className='overflow-auto'>{this.renderMatches()}</div> : <div>{this.renderChatList()}</div>}
                     </div>
-                </div>
-                <div id='chat-window'>
-                    <div id='incoming-messages' style={this.divStyle}>
-                        <ul>
-                            {this.renderChatMessages()}
-                        </ul>
+                    <div className='mt-1'>
+                        {!this.state.showMatches ? <button onClick={() => this.fetchMatches()}>Start a New Chat</button> : <button onClick={() => this.handleGoBack()}>Go Back</button>}
+                    </div>
+                </Col>
+                <Col id='chat-window'>
+                    <div id='messages-window' className='h-100'>
+                        <MessagesContainer currentDisplayedChat={this.state.currentDisplayedChat.messages} currentUser={this.state.currentMessage.user_id} />
+                        <form className='mt-1' onSubmit={(e) => {this.sendChatMessage(socket, e)}}>
+                            <input 
+                                className='w-75' 
+                                type='text' 
+                                onChange={(event) => this.handleMessageInputChange(event)} 
+                                value={this.state.currentMessage.text}>
+                            </input>
+                            <input type='submit'></input>
+                        </form>
                     </div>
                     <br></br>
-                    {this.state.showMatches && this.renderMatches()}
-                    <form style={this.formStyle} onSubmit={(e) => {this.sendChatMessage(socket, e)}}>
-                        <input type='text' onChange={(event) => this.handleMessageInputChange(event)} value={this.state.currentMessage.text}></input><input type='submit'></input>
-                    </form>
-                </div>
-            </div>
+                </Col>
+            </Row>
         );
     }
 }
