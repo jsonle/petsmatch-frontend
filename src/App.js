@@ -27,16 +27,20 @@ class App extends React.Component {
       },
       body: JSON.stringify({
         "auth": {
-          "username": formData.username,
+          "email": formData.email,
           "password": formData.password
         }
       })
     }
 
-    fetch('http://localhost:3000/user_token', configObj)
+    fetch('http://localhost:3000/login', configObj)
     .then(response => response.json())
     .then(response => {
       console.log(response);
+      localStorage.setItem("jwt", response.jwt);
+      this.setState({
+        currentUser: response.user
+      })
     })
   }
 
@@ -44,7 +48,7 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <Navbar onLoginSubmit={this.onLoginSubmit}/>
+          <Navbar onLoginSubmit={this.onLoginSubmit} currentUser={this.state.currentUser}/>
           <Switch>
             <Route exact path="/">
               <HomeContainer />

@@ -4,7 +4,7 @@ import LoginForm from '../components/LoginForm';
 
 class Navbar extends Component {
     state = { 
-        username: "",
+        email: "",
         password: "",
      }
 
