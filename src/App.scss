@@ -20,3 +20,27 @@
 .App-link {
   color: #09d3ac;
 }
+
+body > #root > div {
+  height: 100vh;
+}
+
+ul {
+  padding-inline-start: 0px;
+  list-style: none;
+}
+
+.chat-message {
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 1%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 30px;
+  padding-left: 30px;
+
+}
+
+#chat-window {
+  max-height: 100%;
+}
