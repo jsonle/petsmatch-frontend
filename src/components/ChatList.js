@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { MDBListGroupItem } from "mdbreact";
 
 const ChatList = (props) => {
     return ( 
-        <li onClick={() => props.fetchChatMessages(props.chat.id)}>
-            {props.chat.user_one.name}/{props.chat.user_two.name}
-        </li>
+        <MDBListGroupItem onClick={() => props.fetchChatMessages(props.chat.id)}>
+            {props.otherUser.name}
+        </MDBListGroupItem>
      );
 }
  
