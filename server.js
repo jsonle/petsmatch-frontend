@@ -27,10 +27,7 @@ io.on('connection', function(socket){
       socket.join(room);
     });
     socket.on('sendMessage', (message) => {
-      console.log('message', message)
-      console.log('sendMessage room', message.chat_id)
       io.sockets.in(`chat_id_${message.chat_id}`).emit('receiveMessage', chatMessage(message.user_id, message.text, message.chat_id));
-      // io.emit('receiveMessage', chatMessage(message.user_id, message.text, message.chat_id));
       });
     socket.on('disconnect', function(){});
 });

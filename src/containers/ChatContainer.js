@@ -22,7 +22,6 @@ class ChatContainer extends Component {
             response: false,
             endpoint: "http://127.0.0.1:8000",
             currentDisplayedChat: {
-                // room: undefined,
                 messages: []
             },
             currentMessage: {
@@ -45,7 +44,6 @@ class ChatContainer extends Component {
             socket.on('connect', () => {
             })
             socket.on("receiveMessage", data => {
-                console.log('message received')
                 this.setState({
                     currentDisplayedChat: {
                         messages: [...this.state.currentDisplayedChat.messages, data]}
@@ -66,7 +64,6 @@ class ChatContainer extends Component {
         .then(resp => resp.json())
         .then(data => {
             socket.emit("sendMessage", data);
-            console.log('message sent')
             this.setState({
                 currentMessage: {
                     ...this.state.currentMessage,
@@ -138,10 +135,10 @@ class ChatContainer extends Component {
             },
             body: JSON.stringify({match_id: key}),
         })
-        .then(resp => console.log(resp))
-        // .then(data => {
-        //     console.log(data)
-        // })
+        .then(resp => resp.json())
+        .then(data => {
+            this.fetchChatMessages(data.id)
+        });
     }
 
     renderMatches = () => {

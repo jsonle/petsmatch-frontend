@@ -38,7 +38,6 @@ class App extends React.Component {
     .then(response => {
       console.log(response);
     })
-
   }
 
   render() {
