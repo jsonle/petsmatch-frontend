@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
-import UserMenu from '../components/UserMenu'
+import UserMenu from '../components/UserMenu';
+import Navbar from 'react-bootstrap/Navbar';
+import { LinkContainer } from 'react-router-bootstrap';
 
-class Navbar extends Component {
+class NavbarContainer extends Component {
     state = { 
         email: "",
         password: "",
@@ -20,18 +22,20 @@ class Navbar extends Component {
         this.props.onLoginSubmit(this.state);
     }
     render() { 
-        console.log(this.props.currentUser)
         return ( 
-            <div className="navbar navbar-light bg-primary">
-                Petsmatch
+            <Navbar bg="light" expand="lg">
+                <LinkContainer to="/">
+                    <Navbar.Brand>Petsmatch</Navbar.Brand>
+                </LinkContainer>
+                
                 { this.props.currentUser ?  
                 <UserMenu currentUser={this.props.currentUser} handleLogout={this.props.handleLogout}/>
                 : 
                 <LoginForm handleLoginSubmit={this.handleLoginSubmit} handleChange={this.handleChange}/>}
             
-            </div>
+            </Navbar>
          );
     }
 }
  
-export default Navbar;
+export default NavbarContainer;

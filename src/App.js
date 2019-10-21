@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './containers/Navbar';
+import NavbarContainer from './containers/NavbarContainer';
 import HomeContainer from './containers/HomeContainer';
 import BrowseContainer from './containers/BrowseContainer';
 import ProfileContainer from './containers/ProfileContainer';
@@ -55,7 +55,7 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <Navbar onLoginSubmit={this.onLoginSubmit} currentUser={this.state.currentUser} handleLogout={this.handleLogout}/>
+          <NavbarContainer onLoginSubmit={this.onLoginSubmit} currentUser={this.state.currentUser} handleLogout={this.handleLogout}/>
           <Switch>
             <Route exact path="/">
               <HomeContainer />

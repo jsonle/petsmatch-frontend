@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 const UserMenu = ({ currentUser, handleLogout }) => {
     return (
-        <DropdownButton id="dropdown-basic-button" title={currentUser.name}>
+        <DropdownButton title={currentUser.name}>
             <LinkContainer to="/profile">
                 <Dropdown.Item>View Profile</Dropdown.Item>
             </LinkContainer>
@@ -14,7 +14,9 @@ const UserMenu = ({ currentUser, handleLogout }) => {
             <LinkContainer to={`/chat/${currentUser.id}`}>
                 <Dropdown.Item >Chat</Dropdown.Item>
             </LinkContainer>
-            <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+            <LinkContainer to="/">
+                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+            </LinkContainer>
         </DropdownButton>
     )
 }
