@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import UserStats from '../components/UserStats'
 import { MDBCarousel, MDBCarouselCaption, MDBCarouselInner, MDBCarouselItem, MDBView, MDBMask, MDBContainer } from "mdbreact";
 
 
 class BrowseContainer extends Component {
     state = { 
-        users: []
+        users: [],
+        displayedUser: undefined
      }
 
     componentDidMount() {
@@ -21,21 +23,19 @@ class BrowseContainer extends Component {
     renderUserCards = () => {
         return this.state.users.map( (user, index) => {
             return (
-                <MDBCarouselItem itemId="1">
-                    <MDBView>
-                        <img
-                        className="d-block w-100"
-                        src={"https://mdbootstrap.com/img/Photos/Slides/img%20(68).jpg"}
-                        alt="First slide"
-                        />
-                        <MDBMask overlay="black-light" />
-                    </MDBView>
-                    <MDBCarouselCaption>
-                        <h3 className="h3-responsive">{user.name}</h3>
-                        <p>{user.bio}</p>
-                    </MDBCarouselCaption>
-                </MDBCarouselItem>
+                <a><img className="h-100 slider-image" src={user.image.url} alt="First slide" onClick={ (event) => this.handleClick(event, user.id)} /></a>
             )
+        })
+    }
+
+    handleClick = (event, id) => {
+        fetch(`http://localhost:3000/profile/${id}`)
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data)
+            this.setState({
+                displayedUser: data
+            })
         })
     }
 
@@ -43,16 +43,12 @@ class BrowseContainer extends Component {
         return (
             <div>
                 <div id='browse-slider'>
-                    <MDBContainer>
-                        <MDBCarousel activeItem={1} length={this.state.users.length} showControls={true} showIndicators={true} className="z-depth-1">
-                            <MDBCarouselInner>
-                                {this.renderUserCards()}
-                            </MDBCarouselInner>
-                        </MDBCarousel>
-                    </MDBContainer>
+                    <div id='slider-inner'>
+                        {this.renderUserCards()}
+                    </div>
                 </div>
                 <div id='stats-container'>
-
+                    <UserStats displayedUser={this.state.displayedUser} />
                 </div>
             </div>
          );
