@@ -49,7 +49,7 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <Navbar onLoginSubmit={this.onLoginSubmit}/>
+          <Navbar onLoginSubmit={this.onLoginSubmit} currentUser={this.state.currentUser}/>
           <Switch>
             <Route exact path="/">
               <HomeContainer />
