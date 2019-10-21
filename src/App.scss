@@ -44,3 +44,7 @@ ul {
 #chat-window {
   max-height: 100%;
 }
+
+#incoming-messages ul {
+  flex-direction: column-reverse;
+}

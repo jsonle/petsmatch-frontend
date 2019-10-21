@@ -6,7 +6,10 @@ import { resolveNaptr } from 'dns';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { MDBListGroup, MDBListGroupItem, MDBContainer, MDBBadge } from "mdbreact";
+import MessagesContainer from './MessagesContainer';
 var axios = require('axios');
+const endpoint = "http://127.0.0.1:8000"
+const socket = socketIOClient(endpoint);
 
 
 class ChatContainer extends Component {
@@ -19,7 +22,7 @@ class ChatContainer extends Component {
             response: false,
             endpoint: "http://127.0.0.1:8000",
             currentDisplayedChat: {
-                room: undefined,
+                // room: undefined,
                 messages: []
             },
             currentMessage: {
@@ -37,6 +40,17 @@ class ChatContainer extends Component {
             this.setState({
                 chatList: data
             })
+        })
+        .then( () => {
+            socket.on('connect', () => {
+            })
+            socket.on("receiveMessage", data => {
+                console.log('message received')
+                this.setState({
+                    currentDisplayedChat: {
+                        messages: [...this.state.currentDisplayedChat.messages, data]}
+                })
+            })
         });
     }    
     
@@ -52,6 +66,13 @@ class ChatContainer extends Component {
         .then(resp => resp.json())
         .then(data => {
             socket.emit("sendMessage", data);
+            console.log('message sent')
+            this.setState({
+                currentMessage: {
+                    ...this.state.currentMessage,
+                    text: ''
+                } 
+            })
         });
     };
 
@@ -66,27 +87,24 @@ class ChatContainer extends Component {
 
     renderChatList = () => {
         return this.state.chatList.map( (chat, key) => {
-            console.log(chat)
             if(chat.user_one.id === this.state.currentMessage.user_id) {
                 var otherUser = chat.user_two;
-            } else {
+            } else if (chat.user_two.id === this.state.currentMessage.user_id) {
                 var otherUser = chat.user_one;
             };
-            return(
-                <ChatList key={key} otherUser={otherUser} chat={chat} fetchChatMessages={this.fetchChatMessages} />
-            );
+            if(otherUser) {
+                return <ChatList key={key} otherUser={otherUser} chat={chat} fetchChatMessages={this.fetchChatMessages} />;
+            } 
         });
     };
 
     fetchChatMessages = (chat_id) => {
-        const { endpoint } = this.state;
-        const socket = socketIOClient(endpoint);
         fetch(`http://localhost:3000/chats/${chat_id}`)
         .then(resp => resp.json())
         .then(data => {
+            socket.emit('leave', `chat_id_${this.state.currentMessage.chat_id}`)
             this.setState({
                 currentDisplayedChat: {
-                    room: chat_id,
                     messages: data.messages
                 },
                 currentMessage: {
@@ -96,23 +114,9 @@ class ChatContainer extends Component {
             });
         })
         .then( () => {
-            socket.on('connect', () => {
-                socket.emit('room', `chat_id_${chat_id}`)
-            })
-            socket.on("receiveMessage", data => {
-                this.setState({
-                    currentDisplayedChat: {
-                        messages: [...this.state.currentDisplayedChat.messages, data]}
-                })
-            })
-        })
-    };
+            socket.emit('room', `chat_id_${chat_id}`)
 
-    renderChatMessages = () => {
-        const currentUser = this.state.currentMessage.user_id
-        return this.state.currentDisplayedChat.messages.map( (message, key) => {
-            return <li key={key} className={message.user_id === currentUser ? 'chat-message text-right green lighten-2 rounded-pill' : 'chat-message text-left purple lighten-3 rounded-pill'}>{message.text}</li>
-        });
+        })
     };
 
     fetchMatches = () => {
@@ -168,11 +172,11 @@ class ChatContainer extends Component {
         })
     }
 
-    testChatUserTextAlign = () => {
+    testChatUserTextAlign = (num) => {
         this.setState({
             currentMessage: {
                 ...this.state.currentMessage,
-                user_id: 2
+                user_id: num
             }
         });
     }
@@ -181,8 +185,10 @@ class ChatContainer extends Component {
         const socket = socketIOClient(this.state.endpoint);
         return ( 
             <Row className='h-75 mt-3 ml-3 mr-3'>
+                <h1>{this.state.currentMessage.user_id}</h1>
                 <br></br>
-                <button onClick={() => this.testChatUserTextAlign()}>Test</button>
+                <button onClick={() => this.testChatUserTextAlign(2)}>Test User 2</button>
+                <button onClick={() => this.testChatUserTextAlign(4)}>Test User 4</button>
                 <Col lg={4}>
                     <div className='h-75 border border-dark pt-1 pl-1 pr-1'>
                         {this.state.showMatches ? <div className='overflow-auto'>{this.renderMatches()}</div> : <div>{this.renderChatList()}</div>}
@@ -193,13 +199,7 @@ class ChatContainer extends Component {
                 </Col>
                 <Col id='chat-window'>
                     <div id='messages-window' className='h-100'>
-                        <div id='incoming-messages' className='h-75 overflow-auto border border-dark'>
-                        <MDBContainer className='pt-1 pl-1 pr-1'>
-                            <MDBListGroup className='w-100'>
-                                {this.renderChatMessages()}
-                            </MDBListGroup>
-                        </MDBContainer>
-                        </div>
+                        <MessagesContainer currentDisplayedChat={this.state.currentDisplayedChat.messages} currentUser={this.state.currentMessage.user_id} />
                         <form className='mt-1' onSubmit={(e) => {this.sendChatMessage(socket, e)}}>
                             <input 
                                 className='w-75' 

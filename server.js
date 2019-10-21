@@ -13,11 +13,26 @@ var io = require('socket.io')(server);
 const port = process.env.PORT || 8000;
 
 io.on('connection', function(socket){
-    socket.on('disconnect', function(){
+    socket.on('leave',function(room){  
+      try{
+        console.log('[socket]','leave room :', room);
+        socket.leave(room);
+        socket.to(room).emit('user left', socket.id);
+      }catch(e){
+        console.log('[error]','leave room :', e);
+        socket.emit('error','couldnt perform requested action');
+      }
+    })
+    socket.on('room', function(room) {
+      socket.join(room);
     });
     socket.on('sendMessage', (message) => {
-      io.emit('receiveMessage', chatMessage(message.user_id, message.text, message.chat_id));
+      console.log('message', message)
+      console.log('sendMessage room', message.chat_id)
+      io.sockets.in(`chat_id_${message.chat_id}`).emit('receiveMessage', chatMessage(message.user_id, message.text, message.chat_id));
+      // io.emit('receiveMessage', chatMessage(message.user_id, message.text, message.chat_id));
       });
+    socket.on('disconnect', function(){});
 });
 
 server.listen(port, function(){
