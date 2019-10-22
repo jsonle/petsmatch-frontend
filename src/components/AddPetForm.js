@@ -34,7 +34,7 @@ const AddPetForm = (props) => {
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridPetType">
                     <Form.Label>Pet Type</Form.Label>
-                    <Form.Control type="text" name="pet_type" onChange={props.handlePetFormChange} placeholder="ex. Corgi" value={props.currentInput.species}/>
+                    <Form.Control type="text" name="pet_type" onChange={props.handlePetFormChange} placeholder="ex. Corgi" value={props.currentInput.pet_type}/>
                 </Form.Group>
             </Form.Row>
 

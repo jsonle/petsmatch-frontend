@@ -9,7 +9,6 @@ class AddPetsContainer extends Component {
             age: "",
             pet_type: "",
             category: "dog",
-            user_id: props.currentUser.id
         }
     }
 

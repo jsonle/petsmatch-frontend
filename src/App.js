@@ -80,7 +80,13 @@ class App extends React.Component {
         "Authorization": 'Bearer ' + localStorage.getItem("jwt")
       },
       body: JSON.stringify({
-        pet: newPetData
+        pet: {
+          name: newPetData.name,
+          age: newPetData.age,
+          pet_type: newPetData.pet_type,
+          category: newPetData.category,
+          user_id: this.state.currentUser.id
+        }
       })
     }
 
