@@ -23,7 +23,7 @@ class NavbarContainer extends Component {
     }
     render() { 
         return ( 
-            <Navbar bg="light" expand="lg">
+            <Navbar className="navbar" bg="light" expand="lg">
                 <LinkContainer to="/">
                     <Navbar.Brand>Petsmatch</Navbar.Brand>
                 </LinkContainer>

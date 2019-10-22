@@ -1,9 +1,24 @@
 import React, { Component } from 'react';
+import SignUpForm from '../components/SignUpForm';
 
 class SignUpContainer extends Component {
-    state = {  }
+    state = { 
+        name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
+        age: "",
+        gender: "",
+        bio: "",
+        zipcode: ""
+     }
+     
     render() { 
-        return ( true );
+        return (
+            <div>
+                <SignUpForm />
+            </div>
+        )
     }
 }
  
