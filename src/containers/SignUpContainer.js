@@ -8,15 +8,21 @@ class SignUpContainer extends Component {
         password: "",
         password_confirmation: "",
         age: "",
-        gender: "",
+        gender: "male",
         bio: "",
         zipcode: ""
      }
-     
+
+     handleFormChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+     }
+
     render() { 
         return (
             <div>
-                <SignUpForm />
+                <SignUpForm handleFormChange={this.handleFormChange}/>
             </div>
         )
     }
