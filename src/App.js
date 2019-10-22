@@ -8,7 +8,8 @@ import ChatContainer from './containers/ChatContainer';
 import AddPetsContainer from './containers/AddPetsContainer';
 import { BrowserRouter as Router,
   Switch,
-  Route } from 'react-router-dom';
+  Route,
+  Redirect} from 'react-router-dom';
 import './App.scss';
 import { thisExpression } from '@babel/types';
 
@@ -116,6 +117,7 @@ class App extends React.Component {
             <Route exact path="/profile">
               <ProfileContainer />
             </Route>
+<<<<<<< HEAD
             <Route exact path="/chat">
                 <ChatContainer currentUser={this.state.currentUser} />
             </Route>
@@ -124,6 +126,16 @@ class App extends React.Component {
             <Route exact path="/browse">
                 <BrowseContainer />
             </Route>
+=======
+            {this.state.currentUser ? <Route exact path="/chat"><ChatContainer currentUser={this.state.currentUser} /></Route> : <Redirect from='/chat' to='/'/>}
+            <Route exact path="/signup">
+              <SignUpContainer onSignUpSubmit={this.onSignUpSubmit}/>
+            </Route>
+            <Route exact path="/addpets">
+              <AddPetsContainer />
+            </Route>
+            {this.state.currentUser ? <Route exact path="/browse"><BrowseContainer currentUser={this.state.currentUser}/></Route> : <Redirect from='/browse/' exact to='/'/>}
+>>>>>>> origin/master
           </Switch>
         </div>
       </Router>
