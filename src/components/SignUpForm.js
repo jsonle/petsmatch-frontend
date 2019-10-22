@@ -9,20 +9,20 @@ const SignUpForm = (props) => {
     return ( 
         <Form >
             <Form.Row>
-                    <Form.Group as={Col} controlId="formGridName">
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control type="text" name="name" onChange={props.handleFormChange} placeholder="Enter name" />
-                        <Form.Text className="text-muted">
-                            Please enter your first and last name.
-                        </Form.Text>
-                    </Form.Group>
-                    <Form.Group as={Col} controlId="formGridEmail">
-                        <Form.Label>Email Address</Form.Label>
-                        <Form.Control type="email" name="email" onChange={props.handleFormChange} placeholder="Enter email"/>
-                        <Form.Text className="text-muted">
-                            Your email will be used to log in.
-                        </Form.Text>
-                    </Form.Group>
+                <Form.Group as={Col} controlId="formGridName">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="text" name="name" onChange={props.handleFormChange} placeholder="Enter name" />
+                    <Form.Text className="text-muted">
+                        Please enter your first and last name.
+                    </Form.Text>
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridEmail">
+                    <Form.Label>Email Address</Form.Label>
+                    <Form.Control type="email" name="email" onChange={props.handleFormChange} placeholder="Enter email"/>
+                    <Form.Text className="text-muted">
+                        Your email will be used to log in.
+                    </Form.Text>
+                </Form.Group>
             </Form.Row>
 
             <Form.Row>
@@ -69,11 +69,9 @@ const SignUpForm = (props) => {
  
             </Form.Row>
             
-            <LinkContainer to="/addpets">
-                <Button variant="primary" type="submit" onClick={props.handleSignUpSubmit}>
-                    Create Account and Add Pets!
-                </Button>
-            </LinkContainer>
+            <Button variant="primary" type="submit" onClick={props.handleSignUpSubmit}>
+                Create Account and Add Pets!
+            </Button>
 
         </Form>
      );

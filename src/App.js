@@ -11,6 +11,7 @@ import { BrowserRouter as Router,
   Route,
   Redirect} from 'react-router-dom';
 import './App.scss';
+import { thisExpression } from '@babel/types';
 
 class App extends React.Component {
   state = {
@@ -66,6 +67,35 @@ class App extends React.Component {
           currentUser: response.user
         })
     })
+    .then(response => {
+    })
+  }
+
+  onAddPetSubmit = (newPetData) => {
+
+    let configObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": 'Bearer ' + localStorage.getItem("jwt")
+      },
+      body: JSON.stringify({
+        pet: {
+          name: newPetData.name,
+          age: newPetData.age,
+          pet_type: newPetData.pet_type,
+          category: newPetData.category,
+          user_id: this.state.currentUser.id
+        }
+      })
+    }
+
+    fetch('http://localhost:3000/pets', configObj)
+    .then(response => response.json())
+    .then(response => {
+      console.log(response);
+    })
   }
 
   handleLogout = () => {
@@ -87,13 +117,9 @@ class App extends React.Component {
             <Route exact path="/profile">
               <ProfileContainer />
             </Route>
+            <Route exact path="/signup" render={(routeProps) => <SignUpContainer {...routeProps} onSignUpSubmit={this.onSignUpSubmit}/>}/>
+            <Route exact path="/addpets" render={(routeProps) => <AddPetsContainer {...routeProps} currentUser={this.state.currentUser} onAddPetSubmit={this.onAddPetSubmit}/>}/>
             {this.state.currentUser ? <Route exact path="/chat"><ChatContainer currentUser={this.state.currentUser} /></Route> : <Redirect from='/chat' to='/'/>}
-            <Route exact path="/signup">
-              <SignUpContainer onSignUpSubmit={this.onSignUpSubmit}/>
-            </Route>
-            <Route exact path="/addpets">
-              <AddPetsContainer />
-            </Route>
             {this.state.currentUser ? <Route exact path="/browse"><BrowseContainer currentUser={this.state.currentUser}/></Route> : <Redirect from='/browse/' exact to='/'/>}
           </Switch>
         </div>

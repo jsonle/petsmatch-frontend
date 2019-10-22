@@ -23,11 +23,12 @@ class SignUpContainer extends Component {
      handleSignUpSubmit = event => {
          event.preventDefault();
          this.props.onSignUpSubmit(this.state);
+         this.props.history.push('/addpets');
      }
 
     render() { 
         return (
-            <div>
+            <div className="signup-container">
                 <SignUpForm handleFormChange={this.handleFormChange} handleSignUpSubmit={this.handleSignUpSubmit}/>
             </div>
         )
