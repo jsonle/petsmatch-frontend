@@ -52,3 +52,36 @@ ul {
 .navbar {
   margin-bottom: 20px;
 }
+.carousel-fade {
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#browse-slider {
+  width: 33%;
+  height: 100vh;
+  overflow: scroll;
+  float: left;
+}
+
+#slider-inner {
+    overflow: visible;
+    vertical-align: baseline;
+}
+
+.slider-image {
+  margin-top: 5px;
+  margin-left: 5px;
+  float: left;
+}
+
+.pet-card {
+  float: left;
+  width: 10%;
+}
+  
+
+
+
+

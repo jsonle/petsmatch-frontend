@@ -8,8 +8,13 @@ import ChatContainer from './containers/ChatContainer';
 import AddPetsContainer from './containers/AddPetsContainer';
 import { BrowserRouter as Router,
   Switch,
+<<<<<<< HEAD
   Route } from 'react-router-dom';
 
+=======
+  Route,
+  Link } from 'react-router-dom';
+>>>>>>> origin/master
 import './App.scss';
 
 class App extends React.Component {
@@ -87,8 +92,8 @@ class App extends React.Component {
             <Route exact path="/profile">
               <ProfileContainer />
             </Route>
-            <Route exact path="/chat/:user_id">
-              <ChatContainer />
+            <Route exact path="/chat">
+                <ChatContainer currentUser={this.state.currentUser} />
             </Route>
             <Route exact path="/signup">
               <SignUpContainer onSignUpSubmit={this.onSignUpSubmit}/>
@@ -97,7 +102,7 @@ class App extends React.Component {
               <AddPetsContainer />
             </Route>
             <Route exact path="/browse">
-              <BrowseContainer />
+                <BrowseContainer />
             </Route>
           </Switch>
         </div>

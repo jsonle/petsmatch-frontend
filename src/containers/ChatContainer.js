@@ -13,8 +13,8 @@ const socket = socketIOClient(endpoint);
 
 
 class ChatContainer extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             showMatches: false,
             myMatches: [],
@@ -26,14 +26,14 @@ class ChatContainer extends Component {
             },
             currentMessage: {
                 text: '',
-                user_id: 1,
+                user_id: props.currentUser.id,
                 chat_id: 0
             }
         };
     }
 
     componentDidMount() {
-        fetch('http://localhost:3000/chats', {
+        fetch(`http://localhost:3000/chats/${this.state.currentMessage.user_id}`, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("jwt")
             }
@@ -89,11 +89,12 @@ class ChatContainer extends Component {
 
     renderChatList = () => {
         return this.state.chatList.map( (chat, key) => {
-            if(chat.user_one.id === this.state.currentMessage.user_id) {
-                var otherUser = chat.user_two;
-            } else if (chat.user_two.id === this.state.currentMessage.user_id) {
-                var otherUser = chat.user_one;
+            if(chat.user_one_id === this.state.currentMessage.user_id) {
+                var otherUser = chat.user_two.name;
+            } else if (chat.user_two_id === this.state.currentMessage.user_id) {
+                var otherUser = chat.user_one.name;
             };
+            console.log('other user', otherUser)
             if(otherUser) {
                 return <ChatList key={key} otherUser={otherUser} chat={chat} fetchChatMessages={this.fetchChatMessages} />;
             } 
@@ -101,10 +102,15 @@ class ChatContainer extends Component {
     };
 
     fetchChatMessages = (chat_id) => {
-        fetch(`http://localhost:3000/chats/${chat_id}`)
+        fetch(`http://localhost:3000/chat/${chat_id}`, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+            }
+        })
         .then(resp => resp.json())
         .then(data => {
             socket.emit('leave', `chat_id_${this.state.currentMessage.chat_id}`)
+            console.log('fetch messages data', data)
             this.setState({
                 currentDisplayedChat: {
                     messages: data.messages
@@ -117,8 +123,8 @@ class ChatContainer extends Component {
         })
         .then( () => {
             socket.emit('room', `chat_id_${chat_id}`)
-
         })
+        .catch(err => console.log(err))
     };
 
     fetchMatches = () => {
@@ -192,10 +198,6 @@ class ChatContainer extends Component {
         const socket = socketIOClient(this.state.endpoint);
         return ( 
             <Row className='h-75 mt-3 ml-3 mr-3'>
-                <h1>{this.state.currentMessage.user_id}</h1>
-                <br></br>
-                <button onClick={() => this.testChatUserTextAlign(2)}>Test User 2</button>
-                <button onClick={() => this.testChatUserTextAlign(4)}>Test User 4</button>
                 <Col lg={4}>
                     <div className='h-75 border border-dark pt-1 pl-1 pr-1'>
                         {this.state.showMatches ? <div className='overflow-auto'>{this.renderMatches()}</div> : <div>{this.renderChatList()}</div>}
