@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import UserStats from '../components/UserStats'
-import { MDBCarousel, MDBCarouselCaption, MDBCarouselInner, MDBCarouselItem, MDBView, MDBMask, MDBContainer } from "mdbreact";
 
 
 class BrowseContainer extends Component {
@@ -49,7 +48,6 @@ class BrowseContainer extends Component {
                     matched =  true
                 }
             })
-            console.log('matched', matched)
             this.setState({
                 displayedUser: data,
                 displayedPets: [],
@@ -64,17 +62,15 @@ class BrowseContainer extends Component {
                 })
                 .then(resp => resp.json())
                 .then(data => {
-                    console.log('pet fetch',data)
                     this.setState({
                         displayedPets: [...this.state.displayedPets, data]
                     })
-                    console.log(this.state)
                 })
             })
         })
     }
 
-    handleMatchClick = (id) => {
+    createMatch = (id) => {
         fetch(`http://localhost:3000/matches/`, {
             method: 'POST',
             headers: {
@@ -95,10 +91,38 @@ class BrowseContainer extends Component {
         })
     }
 
+    deleteMatch = (id) => {
+        fetch('http://localhost:3000/matches/', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+            },
+            body: JSON.stringify({
+                user_one_id: this.props.currentUser.id,
+                user_two_id: id
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            this.setState({
+                isMatchedWithDisplayed: false
+            })
+        })
+    }
+
+    handleMatchClick = (id) => {
+        if(this.state.isMatchedWithDisplayed) {
+            this.deleteMatch(id)
+        } else {
+            this.createMatch(id)
+        }
+
+    }
+
     renderMatchImage = () => {
-        console.log("this.props.isMatchedWithDisplayed",this.state.isMatchedWithDisplayed)
         if(this.state.isMatchedWithDisplayed === true) {
-            return <img id='match-button' src={process.env.PUBLIC_URL + '/match-fire-pngrepo-com.png'}></img>
+            return <img id='match-button' onClick={ () => this.handleMatchClick(this.state.displayedUser.id)} src={process.env.PUBLIC_URL + '/match-fire-pngrepo-com.png'}></img>
         } else {
             return <img id='match-button' onClick={ () => this.handleMatchClick(this.state.displayedUser.id)} src={process.env.PUBLIC_URL + '/match-unlit.png'}></img>
         }
