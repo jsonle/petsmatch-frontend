@@ -5,6 +5,7 @@ import BrowseContainer from './containers/BrowseContainer';
 import ProfileContainer from './containers/ProfileContainer';
 import SignUpContainer from './containers/SignUpContainer';
 import ChatContainer from './containers/ChatContainer';
+import AddPetsContainer from './containers/AddPetsContainer';
 import { BrowserRouter as Router,
   Switch,
   Route,
@@ -68,6 +69,9 @@ class App extends React.Component {
             </Route>
             <Route exact path="/signup">
               <SignUpContainer />
+            </Route>
+            <Route exact path="/addpets">
+              <AddPetsContainer />
             </Route>
             <Route exact path="/browse">
               <BrowseContainer />

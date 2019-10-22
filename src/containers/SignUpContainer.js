@@ -21,10 +21,15 @@ class SignUpContainer extends Component {
         })
      }
 
+     handleSignUpSubmit = event => {
+         event.preventDefault();
+
+     }
+
     render() { 
         return (
             <div>
-                <SignUpForm handleFormChange={this.handleFormChange}/>
+                <SignUpForm handleFormChange={this.handleFormChange} handleSignUpSubmit={this.handleSignUpSubmit}/>
             </div>
         )
     }

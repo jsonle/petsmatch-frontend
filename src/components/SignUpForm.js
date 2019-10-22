@@ -2,11 +2,12 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
+import { LinkContainer } from 'react-router-bootstrap';
 import DropzoneComponent from 'react-dropzone-component';
 
 const SignUpForm = (props) => {
     return ( 
-        <Form>
+        <Form onSubmit={props.handleSignUpSubmit}>
             <Form.Row>
                     <Form.Group as={Col} controlId="formGridName">
                         <Form.Label>Name</Form.Label>
@@ -64,8 +65,15 @@ const SignUpForm = (props) => {
                     <Form.Label>Upload Picture</Form.Label>
                     <Form.Control type="text" name="image" onChange={props.handleFormChange} />
                 </Form.Group>
-            </Form.Row>
+
  
+            </Form.Row>
+            
+            <LinkContainer to="/addpets">
+                <Button variant="primary" type="submit">
+                    Create Account and Add Pets!
+                </Button>
+            </LinkContainer>
 
         </Form>
      );
