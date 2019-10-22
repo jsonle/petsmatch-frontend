@@ -8,13 +8,8 @@ import ChatContainer from './containers/ChatContainer';
 import AddPetsContainer from './containers/AddPetsContainer';
 import { BrowserRouter as Router,
   Switch,
-<<<<<<< HEAD
   Route } from 'react-router-dom';
 
-=======
-  Route,
-  Link } from 'react-router-dom';
->>>>>>> origin/master
 import './App.scss';
 
 class App extends React.Component {
