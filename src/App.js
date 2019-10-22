@@ -9,7 +9,6 @@ import { BrowserRouter as Router,
   Switch,
   Route,
   Link } from 'react-router-dom';
-
 import './App.scss';
 
 class App extends React.Component {
@@ -63,14 +62,14 @@ class App extends React.Component {
             <Route exact path="/profile">
               <ProfileContainer />
             </Route>
-            <Route exact path="/chat/:user_id">
-              <ChatContainer />
+            <Route exact path="/chat">
+                <ChatContainer currentUser={this.state.currentUser} />
             </Route>
             <Route exact path="/signup">
               <SignUpContainer />
             </Route>
             <Route exact path="/browse">
-              <BrowseContainer />
+                <BrowseContainer />
             </Route>
           </Switch>
         </div>
