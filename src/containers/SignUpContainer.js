@@ -23,9 +23,11 @@ class SignUpContainer extends Component {
      handleSignUpSubmit = event => {
          event.preventDefault();
          this.props.onSignUpSubmit(this.state);
+         this.props.history.push('/addpets');
      }
 
     render() { 
+        console.log(this.props)
         return (
             <div>
                 <SignUpForm handleFormChange={this.handleFormChange} handleSignUpSubmit={this.handleSignUpSubmit}/>

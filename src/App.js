@@ -90,9 +90,7 @@ class App extends React.Component {
             <Route exact path="/chat">
                 <ChatContainer currentUser={this.state.currentUser} />
             </Route>
-            <Route exact path="/signup">
-              <SignUpContainer onSignUpSubmit={this.onSignUpSubmit}/>
-            </Route>
+            <Route exact path="/signup" render={(routeProps) => <SignUpContainer {...routeProps} onSignUpSubmit={this.onSignUpSubmit}/>}/>
             <Route exact path="/addpets">
               <AddPetsContainer />
             </Route>
