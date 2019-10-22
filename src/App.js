@@ -8,7 +8,7 @@ import ChatContainer from './containers/ChatContainer';
 import { BrowserRouter as Router,
   Switch,
   Route,
-  Link } from 'react-router-dom';
+  Redirect} from 'react-router-dom';
 import './App.scss';
 
 class App extends React.Component {
@@ -62,15 +62,11 @@ class App extends React.Component {
             <Route exact path="/profile">
               <ProfileContainer />
             </Route>
-            <Route exact path="/chat">
-                <ChatContainer currentUser={this.state.currentUser} />
-            </Route>
+            {this.state.currentUser ? <Route exact path="/chat"><ChatContainer currentUser={this.state.currentUser} /></Route> : <Redirect from='/chat' to='/'/>}
             <Route exact path="/signup">
               <SignUpContainer />
             </Route>
-            <Route exact path="/browse">
-                <BrowseContainer currentUser={this.state.currentUser}/>
-            </Route>
+            {this.state.currentUser ? <Route exact path="/browse"><BrowseContainer currentUser={this.state.currentUser}/></Route> : <Redirect from='/browse/' exact to='/'/>}
           </Switch>
         </div>
       </Router>

@@ -74,8 +74,13 @@ ul {
 }
 
 .pet-card {
-  float: left;
+  display: inline-block;
   width: 10%;
+}
+
+#pet-card-inner {
+  margin-left: auto;
+  margin-right: auto
 }
 
 .browse-user-name {
@@ -88,6 +93,27 @@ ul {
   position: absolute
 }
   
+.home-image {
+  margin-top: 100px;
+  width: 200px;
+}
+
+#logo {
+  margin-top: -40px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  display: block;
+}
+
+.dropdown {
+  margin-left: auto
+}
+
+.form-inline {
+  margin-left: auto
+}
+
 
 
 
