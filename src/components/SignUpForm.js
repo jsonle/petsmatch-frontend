@@ -7,7 +7,7 @@ import DropzoneComponent from 'react-dropzone-component';
 
 const SignUpForm = (props) => {
     return ( 
-        <Form onSubmit={props.handleSignUpSubmit}>
+        <Form >
             <Form.Row>
                     <Form.Group as={Col} controlId="formGridName">
                         <Form.Label>Name</Form.Label>
@@ -70,7 +70,7 @@ const SignUpForm = (props) => {
             </Form.Row>
             
             <LinkContainer to="/addpets">
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" onClick={props.handleSignUpSubmit}>
                     Create Account and Add Pets!
                 </Button>
             </LinkContainer>

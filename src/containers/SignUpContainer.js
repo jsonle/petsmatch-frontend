@@ -12,7 +12,6 @@ class SignUpContainer extends Component {
         bio: "",
         zipcode: "",
         image: "",
-        newUserId: null
      }
 
      handleFormChange = event => {
@@ -23,7 +22,7 @@ class SignUpContainer extends Component {
 
      handleSignUpSubmit = event => {
          event.preventDefault();
-
+         this.props.onSignUpSubmit(this.state);
      }
 
     render() { 
