@@ -69,11 +69,9 @@ const SignUpForm = (props) => {
  
             </Form.Row>
             
-            <LinkContainer to="/addpets">
-                <Button variant="primary" type="submit" onClick={props.handleSignUpSubmit}>
-                    Create Account and Add Pets!
-                </Button>
-            </LinkContainer>
+            <Button variant="primary" type="submit" onClick={props.handleSignUpSubmit}>
+                Create Account and Add Pets!
+            </Button>
 
         </Form>
      );

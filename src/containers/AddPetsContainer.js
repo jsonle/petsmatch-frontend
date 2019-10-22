@@ -10,7 +10,7 @@ class AddPetsContainer extends Component {
             breed: "",
             species: "",
             category: "dog",
-            // user_id: props.currentUser.id
+            user_id: props.currentUser.id
         }
     }
 
@@ -19,10 +19,35 @@ class AddPetsContainer extends Component {
             [event.target.name]: event.target.value
         })
     }
+
+    handleAddPetSubmit = event => {
+        event.preventDefault();
+        this.props.onAddPetSubmit(this.state);
+        this.props.history.push('/');
+    }
+
+    handleAddAnotherPetClick = event => {
+        event.preventDefault();
+        this.props.onAddPetSubmit(this.state);
+        this.props.history.push('/addpets');
+        this.setState({
+            name: "",
+            age: "",
+            breed: "",
+            species: "",
+            category: "dog",
+        })
+    }
+
     render() { 
         return (
             <div className="add-pets-container">
-                <AddPetForm handlePetFormChange={this.handlePetFormChange}/>
+                <AddPetForm 
+                 handlePetFormChange={this.handlePetFormChange}
+                 handleAddPetSubmit={this.handleAddPetSubmit}
+                 handleAddAnotherPetClick={this.handleAddAnotherPetClick}
+                 currentInput={this.state}
+                 />
             </div>
         );
     }

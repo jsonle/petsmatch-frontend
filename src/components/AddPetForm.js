@@ -11,15 +11,15 @@ const AddPetForm = (props) => {
             <Form.Row>
                 <Form.Group as={Col} controlId="formGridName">
                     <Form.Label>Pet Name</Form.Label>
-                    <Form.Control type="text" name="name" onChange={props.handlePetFormChange} placeholder="Enter name" />
+                    <Form.Control type="text" name="name" onChange={props.handlePetFormChange} placeholder="Enter name" value={props.currentInput.name} />
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridAge">
                     <Form.Label>Age</Form.Label>
-                    <Form.Control type="text" name="age" onChange={props.handlePetFormChange} placeholder="Age" />
+                    <Form.Control type="text" name="age" onChange={props.handlePetFormChange} placeholder="Age" value={props.currentInput.age} />
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridCategory">
                     <Form.Label>Type</Form.Label>
-                    <Form.Control as="select" name="category" onChange={props.handlePetFormChange}>
+                    <Form.Control as="select" name="category" onChange={props.handlePetFormChange} value={props.currentInput.category}>
                         <option value="dog">Dog</option>
                         <option value="cat">Cat</option>
                         <option value="bird">Bird</option>
@@ -34,16 +34,21 @@ const AddPetForm = (props) => {
             <Form.Row>
                 <Form.Group as={Col} controlId="formGridSpecies">
                     <Form.Label>Species</Form.Label>
-                    <Form.Control type="text" name="species" onChange={props.handlePetFormChange} placeholder="Species" />
+                    <Form.Control type="text" name="species" onChange={props.handlePetFormChange} placeholder="Species" value={props.currentInput.species}/>
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridBreed">
                     <Form.Label>Species</Form.Label>
-                    <Form.Control type="text" name="breed" onChange={props.handlePetFormChange} placeholder="Breed" />
+                    <Form.Control type="text" name="breed" onChange={props.handlePetFormChange} placeholder="Breed" value={props.currentInput.breed}/>
                 </Form.Group>
             </Form.Row>
-            
-            <Form.Row>
 
+            <Form.Row>
+                <Button variant="primary" type="submit" onClick={props.handleAddAnotherPetClick}>
+                    Add another pet!
+                </Button>
+                <Button variant="primary" type="submit" onClick={props.handleAddPetSubmit}>
+                    Done
+                </Button>
             </Form.Row>
         </Form>
     );

@@ -68,6 +68,27 @@ class App extends React.Component {
     })
   }
 
+  onAddPetSubmit = (newPetData) => {
+
+    let configObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": 'Bearer ' + localStorage.getItem("jwt")
+      },
+      body: JSON.stringify({
+        pet: newPetData
+      })
+    }
+
+    fetch('http://localhost:3000/pets', configObj)
+    .then(response => response.json())
+    .then(response => {
+      console.log(response);
+    })
+  }
+
   handleLogout = () => {
     localStorage.removeItem("jwt");
     this.setState({
@@ -91,9 +112,7 @@ class App extends React.Component {
                 <ChatContainer currentUser={this.state.currentUser} />
             </Route>
             <Route exact path="/signup" render={(routeProps) => <SignUpContainer {...routeProps} onSignUpSubmit={this.onSignUpSubmit}/>}/>
-            <Route exact path="/addpets">
-              <AddPetsContainer currentUser={this.state.currentUser}/>
-            </Route>
+            <Route exact path="/addpets" render={(routeProps) => <AddPetsContainer {...routeProps} currentUser={this.state.currentUser} onAddPetSubmit={this.onAddPetSubmit}/>}/>
             <Route exact path="/browse">
                 <BrowseContainer />
             </Route>
