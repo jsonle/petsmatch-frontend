@@ -13,12 +13,7 @@ import './App.scss';
 
 class App extends React.Component {
   state = {
-<<<<<<< HEAD
-    currentUser: {},
-    baseUrl: 'http://localhost:3000/'
-=======
     currentUser: null
->>>>>>> origin/master
   }
 
   onLoginSubmit = (formData) => {
@@ -67,14 +62,14 @@ class App extends React.Component {
             <Route exact path="/profile">
               <ProfileContainer />
             </Route>
-            <Route exact path="/chat/:user_id">
-              <ChatContainer baseUrl={this.state.baseUrl} />
+            <Route exact path="/chat">
+                <ChatContainer currentUser={this.state.currentUser} />
             </Route>
             <Route exact path="/signup">
               <SignUpContainer />
             </Route>
             <Route exact path="/browse">
-                <BrowseContainer baseUrl={this.state.baseUrl} />
+                <BrowseContainer />
             </Route>
           </Switch>
         </div>

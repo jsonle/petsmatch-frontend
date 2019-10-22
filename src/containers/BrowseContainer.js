@@ -6,7 +6,8 @@ import { MDBCarousel, MDBCarouselCaption, MDBCarouselInner, MDBCarouselItem, MDB
 class BrowseContainer extends Component {
     state = { 
         users: [],
-        displayedUser: undefined
+        displayedUser: undefined,
+        displayedPets: []
      }
 
     componentDidMount() {
@@ -29,12 +30,33 @@ class BrowseContainer extends Component {
     }
 
     handleClick = (event, id) => {
-        fetch(`http://localhost:3000/profile/${id}`)
+        fetch(`http://localhost:3000/profile/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+            },
+        })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
+            console.log('the data', data)
             this.setState({
-                displayedUser: data
+                displayedUser: data,
+                displayedPets: []
+            })
+            data.pets.map( (pet) => {
+                fetch(`http://localhost:3000/pets/${pet.id}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+                    },
+                })
+                .then(resp => resp.json())
+                .then(data => {
+                    console.log('pet fetch',data)
+                    this.setState({
+                        displayedPets: [...this.state.displayedPets, data]
+                    })
+                })
             })
         })
     }
@@ -48,7 +70,7 @@ class BrowseContainer extends Component {
                     </div>
                 </div>
                 <div id='stats-container'>
-                    <UserStats displayedUser={this.state.displayedUser} />
+                    {this.state.displayedUser && <UserStats displayedPets={this.state.displayedPets} displayedUser={this.state.displayedUser} />}
                 </div>
             </div>
          );

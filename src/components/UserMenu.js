@@ -11,7 +11,7 @@ const UserMenu = ({ currentUser, handleLogout }) => {
             <LinkContainer to="/browse">
                 <Dropdown.Item>Browse</Dropdown.Item>
             </LinkContainer>
-            <LinkContainer to={`/chat/${currentUser.id}`}>
+            <LinkContainer to={`/chat`}>
                 <Dropdown.Item >Chat</Dropdown.Item>
             </LinkContainer>
             <LinkContainer to="/">
