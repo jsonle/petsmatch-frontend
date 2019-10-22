@@ -17,9 +17,7 @@ const UserMenu = ({ currentUser, handleLogout }) => {
             <LinkContainer to={`/chat`}>
                 <Dropdown.Item >Chat</Dropdown.Item>
             </LinkContainer>
-            <LinkContainer to="/">
-                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
-            </LinkContainer>
+            <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
         </DropdownButton>
     )
 }

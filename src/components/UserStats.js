@@ -4,8 +4,6 @@ import PetsList from './PetsList'
 
 
 const UserStats = (props) => {
-
-    console.log(props.isMatchedWithDisplayed)
     return ( 
         <div className='clearfix w-75 float-right pt-3 pl-3 pr-3'>
             {props.renderMatchImage()}
@@ -17,7 +15,7 @@ const UserStats = (props) => {
                 <div id='pet-card-inner'>
                     {props.displayedPets.map( (pet, index) => {
                         return (
-                            <div className='pet-card w-10'>
+                            <div key={index} className='pet-card w-10'>
                                 <img className='w-100' src={pet.image.url}></img>
                                 <p>{pet.name}</p>
                             </div>

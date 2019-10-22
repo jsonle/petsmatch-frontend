@@ -94,7 +94,6 @@ class ChatContainer extends Component {
             } else if (chat.user_two_id === this.state.currentMessage.user_id) {
                 var otherUser = chat.user_one.name;
             };
-            console.log('other user', otherUser)
             if(otherUser) {
                 return <ChatList key={key} otherUser={otherUser} chat={chat} fetchChatMessages={this.fetchChatMessages} />;
             } 
