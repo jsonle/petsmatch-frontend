@@ -59,7 +59,7 @@ ul {
 }
 
 #browse-slider {
-  width: 33%;
+  width: 20%;
   height: 100vh;
   overflow: scroll;
   float: left;
@@ -72,15 +72,51 @@ ul {
 
 .slider-image {
   margin-top: 5px;
-  margin-left: 5px;
-  float: left;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .pet-card {
-  float: left;
+  display: inline-block;
   width: 10%;
 }
+
+#pet-card-inner {
+  margin-left: auto;
+  margin-right: auto
+}
+
+.browse-user-name {
+  text-align: center;
+  width: 100%
+}
+
+#match-button {
+  width: 5%;
+  position: absolute
+}
   
+.home-image {
+  margin-top: 100px;
+  width: 200px;
+}
+
+#logo {
+  margin-top: -40px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  display: block;
+}
+
+.dropdown {
+  margin-left: auto
+}
+
+.form-inline {
+  margin-left: auto
+}
+
 
 
 
