@@ -3,9 +3,9 @@ import { MDBListGroupItem } from "mdbreact";
 
 const ChatList = (props) => {
     return ( 
-        <MDBListGroupItem onClick={() => props.fetchChatMessages(props.chat.id)}>
-            {props.otherUser}
-        </MDBListGroupItem>
+            <MDBListGroupItem onClick={() => props.fetchChatMessages(props.chat.id)}>
+                {props.otherUser}
+            </MDBListGroupItem>
      );
 }
  

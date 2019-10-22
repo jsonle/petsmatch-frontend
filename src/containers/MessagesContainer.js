@@ -7,7 +7,6 @@ class MessagesContainer extends Component {
 
     renderChatMessages = () => {
         const currentUser = this.props.currentUser
-        console.log('message props', this.props)
         return this.props.currentDisplayedChat.map( (message, key) => {
             return <li key={key} className={message.user_id === currentUser ? 'chat-message text-right green lighten-2 rounded-pill' : 'chat-message text-left purple lighten-3 rounded-pill'}>{message.text}</li>
         });

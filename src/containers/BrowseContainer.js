@@ -23,7 +23,7 @@ class BrowseContainer extends Component {
     renderUserCards = () => {
         return this.state.users.map( (user, index) => {
             return (
-                <div className='clearfix text-center'>
+                <div key={index} className='clearfix text-center'>
                         <img className="w-75 slider-image" src={user.image.url} alt="First slide" onClick={ (event) => this.handleClick(event, user.id)} />
                         <br></br>
                         <p className='browse-user-name float-left'>{user.name}</p>
@@ -43,7 +43,6 @@ class BrowseContainer extends Component {
         .then(data => {
             let matched  = false
             data.matches.map( (match) => {
-                console.log('match', match)
                 if(match.user_one_id === this.props.currentUser.id || match.user_two_id === this.props.currentUser.id ) {
                     matched =  true
                 }
@@ -84,7 +83,6 @@ class BrowseContainer extends Component {
         })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
             this.setState({
                 isMatchedWithDisplayed: true
             })

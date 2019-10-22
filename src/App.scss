@@ -60,7 +60,7 @@ ul {
 
 #browse-slider {
   width: 20%;
-  height: 100vh;
+  height: 90vh;
   overflow: scroll;
   float: left;
 }
@@ -79,6 +79,7 @@ ul {
 .pet-card {
   display: inline-block;
   width: 10%;
+  margin: 5%
 }
 
 #pet-card-inner {
@@ -92,8 +93,9 @@ ul {
 }
 
 #match-button {
-  width: 5%;
-  position: absolute
+  width: 8%;
+  position: absolute;
+  right: 1%;
 }
   
 .home-image {
