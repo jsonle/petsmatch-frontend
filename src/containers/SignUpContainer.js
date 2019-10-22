@@ -10,7 +10,9 @@ class SignUpContainer extends Component {
         age: "",
         gender: "male",
         bio: "",
-        zipcode: ""
+        zipcode: "",
+        image: "",
+        newUserId: null
      }
 
      handleFormChange = event => {

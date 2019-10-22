@@ -1,8 +1,8 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import DropzoneComponent from 'react-dropzone-component';
 
 const SignUpForm = (props) => {
     return ( 
@@ -57,8 +57,12 @@ const SignUpForm = (props) => {
 
             <Form.Row>
                 <Form.Group as={Col} controlId="formGridBio">
-                    <Form.Label>Bio:</Form.Label>
+                    <Form.Label>Bio</Form.Label>
                     <Form.Control as="textarea" name="bio" onChange={props.handleFormChange} placeholder="Let everyone know a little about yourself."/>
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridPicture">
+                    <Form.Label>Upload Picture</Form.Label>
+                    <Form.Control type="text" name="image" onChange={props.handleFormChange} />
                 </Form.Group>
             </Form.Row>
  
