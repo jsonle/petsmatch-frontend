@@ -5,10 +5,11 @@ import BrowseContainer from './containers/BrowseContainer';
 import ProfileContainer from './containers/ProfileContainer';
 import SignUpContainer from './containers/SignUpContainer';
 import ChatContainer from './containers/ChatContainer';
+import AddPetsContainer from './containers/AddPetsContainer';
 import { BrowserRouter as Router,
   Switch,
-  Route,
-  Link } from 'react-router-dom';
+  Route } from 'react-router-dom';
+
 import './App.scss';
 
 class App extends React.Component {
@@ -43,6 +44,30 @@ class App extends React.Component {
     })
   }
 
+  onSignUpSubmit = (signUpData) => {
+
+    let configObj = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            user: signUpData
+        })
+    }
+
+    fetch('http://localhost:3000/users', configObj)
+    .then(response => response.json())
+    .then(response => {
+        console.log(response);
+        localStorage.setItem("jwt", response.jwt);
+        this.setState({
+          currentUser: response.user
+        })
+    })
+  }
+
   handleLogout = () => {
     localStorage.removeItem("jwt");
     this.setState({
@@ -66,7 +91,10 @@ class App extends React.Component {
                 <ChatContainer currentUser={this.state.currentUser} />
             </Route>
             <Route exact path="/signup">
-              <SignUpContainer />
+              <SignUpContainer onSignUpSubmit={this.onSignUpSubmit}/>
+            </Route>
+            <Route exact path="/addpets">
+              <AddPetsContainer />
             </Route>
             <Route exact path="/browse">
                 <BrowseContainer />
