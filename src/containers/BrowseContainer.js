@@ -24,7 +24,12 @@ class BrowseContainer extends Component {
     renderUserCards = () => {
         return this.state.users.map( (user, index) => {
             return (
-                <a><img className="h-100 slider-image" src={user.image.url} alt="First slide" onClick={ (event) => this.handleClick(event, user.id)} /></a>
+                <div className='clearfix text-center'>
+                        <img className="w-75 slider-image" src={user.image.url} alt="First slide" onClick={ (event) => this.handleClick(event, user.id)} />
+                        <br></br>
+                        <p className='browse-user-name float-left'>{user.name}</p>
+
+                </div>
             )
         })
     }
@@ -61,6 +66,22 @@ class BrowseContainer extends Component {
         })
     }
 
+    handleMatchClick = (event, id) => {
+        fetch(`http://localhost:3000/matches/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+            },
+            body: JSON.stringify({
+                user_one_id: this.props.currentUser.id,
+                user_two_id: id
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => console.log(data))
+    }
+
     render() { 
         return (
             <div>
@@ -70,7 +91,7 @@ class BrowseContainer extends Component {
                     </div>
                 </div>
                 <div id='stats-container'>
-                    {this.state.displayedUser && <UserStats displayedPets={this.state.displayedPets} displayedUser={this.state.displayedUser} />}
+                    {this.state.displayedUser && <UserStats handleMatchClick={this.handleMatchClick} displayedPets={this.state.displayedPets} displayedUser={this.state.displayedUser} />}
                 </div>
             </div>
          );

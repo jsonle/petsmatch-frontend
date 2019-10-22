@@ -69,7 +69,7 @@ class App extends React.Component {
               <SignUpContainer />
             </Route>
             <Route exact path="/browse">
-                <BrowseContainer />
+                <BrowseContainer currentUser={this.state.currentUser}/>
             </Route>
           </Switch>
         </div>
