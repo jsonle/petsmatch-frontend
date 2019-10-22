@@ -27,9 +27,8 @@ class SignUpContainer extends Component {
      }
 
     render() { 
-        console.log(this.props)
         return (
-            <div>
+            <div className="signup-container">
                 <SignUpForm handleFormChange={this.handleFormChange} handleSignUpSubmit={this.handleSignUpSubmit}/>
             </div>
         )
