@@ -117,25 +117,10 @@ class App extends React.Component {
             <Route exact path="/profile">
               <ProfileContainer />
             </Route>
-<<<<<<< HEAD
-            <Route exact path="/chat">
-                <ChatContainer currentUser={this.state.currentUser} />
-            </Route>
             <Route exact path="/signup" render={(routeProps) => <SignUpContainer {...routeProps} onSignUpSubmit={this.onSignUpSubmit}/>}/>
             <Route exact path="/addpets" render={(routeProps) => <AddPetsContainer {...routeProps} currentUser={this.state.currentUser} onAddPetSubmit={this.onAddPetSubmit}/>}/>
-            <Route exact path="/browse">
-                <BrowseContainer />
-            </Route>
-=======
             {this.state.currentUser ? <Route exact path="/chat"><ChatContainer currentUser={this.state.currentUser} /></Route> : <Redirect from='/chat' to='/'/>}
-            <Route exact path="/signup">
-              <SignUpContainer onSignUpSubmit={this.onSignUpSubmit}/>
-            </Route>
-            <Route exact path="/addpets">
-              <AddPetsContainer />
-            </Route>
             {this.state.currentUser ? <Route exact path="/browse"><BrowseContainer currentUser={this.state.currentUser}/></Route> : <Redirect from='/browse/' exact to='/'/>}
->>>>>>> origin/master
           </Switch>
         </div>
       </Router>
