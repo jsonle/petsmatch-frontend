@@ -61,6 +61,10 @@ class App extends React.Component {
     .then(response => response.json())
     .then(response => {
         console.log(response);
+        localStorage.setItem("jwt", response.jwt);
+        this.setState({
+          currentUser: response.user
+        })
     })
   }
 
