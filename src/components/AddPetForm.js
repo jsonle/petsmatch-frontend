@@ -17,8 +17,11 @@ const AddPetForm = (props) => {
                     <Form.Label>Age</Form.Label>
                     <Form.Control type="text" name="age" onChange={props.handlePetFormChange} placeholder="Age" value={props.currentInput.age} />
                 </Form.Group>
+            </Form.Row>
+
+            <Form.Row>
                 <Form.Group as={Col} controlId="formGridCategory">
-                    <Form.Label>Type</Form.Label>
+                    <Form.Label>Pet Category</Form.Label>
                     <Form.Control as="select" name="category" onChange={props.handlePetFormChange} value={props.currentInput.category}>
                         <option value="dog">Dog</option>
                         <option value="cat">Cat</option>
@@ -29,16 +32,9 @@ const AddPetForm = (props) => {
                         <option value="exotic">Exotic</option>
                     </Form.Control>
                 </Form.Group>
-            </Form.Row>
-
-            <Form.Row>
-                <Form.Group as={Col} controlId="formGridSpecies">
-                    <Form.Label>Species</Form.Label>
-                    <Form.Control type="text" name="species" onChange={props.handlePetFormChange} placeholder="Species" value={props.currentInput.species}/>
-                </Form.Group>
-                <Form.Group as={Col} controlId="formGridBreed">
-                    <Form.Label>Species</Form.Label>
-                    <Form.Control type="text" name="breed" onChange={props.handlePetFormChange} placeholder="Breed" value={props.currentInput.breed}/>
+                <Form.Group as={Col} controlId="formGridPetType">
+                    <Form.Label>Pet Type</Form.Label>
+                    <Form.Control type="text" name="pet_type" onChange={props.handlePetFormChange} placeholder="ex. Corgi" value={props.currentInput.species}/>
                 </Form.Group>
             </Form.Row>
 

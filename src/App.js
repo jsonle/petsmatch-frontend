@@ -9,8 +9,8 @@ import AddPetsContainer from './containers/AddPetsContainer';
 import { BrowserRouter as Router,
   Switch,
   Route } from 'react-router-dom';
-
 import './App.scss';
+import { thisExpression } from '@babel/types';
 
 class App extends React.Component {
   state = {
@@ -65,6 +65,8 @@ class App extends React.Component {
         this.setState({
           currentUser: response.user
         })
+    })
+    .then(response => {
     })
   }
 

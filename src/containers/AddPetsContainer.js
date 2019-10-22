@@ -7,8 +7,7 @@ class AddPetsContainer extends Component {
         this.state = {
             name: "",
             age: "",
-            breed: "",
-            species: "",
+            pet_type: "",
             category: "dog",
             user_id: props.currentUser.id
         }
