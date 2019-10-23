@@ -2,6 +2,8 @@ import React from 'react';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
+import { LinkContainer } from 'react-router-bootstrap';
+
 
 const UserProfileDetails = (props) => {
     return (
@@ -9,6 +11,7 @@ const UserProfileDetails = (props) => {
             <Col sm={2} className="profile-image">
                 {props.currentUser.image ? <img src={props.currentUser.image.url} alt=""></img> : <h2>No Image Found</h2>} 
             </Col>
+
             <Col sm={6} className="profile-details">
                 <h3>{props.currentUser.name}</h3>
                 <p>Email: {props.currentUser.email}</p>
@@ -17,13 +20,17 @@ const UserProfileDetails = (props) => {
                 <p>Zipcode: {props.currentUser.zipcode}</p>
                 <label>Bio:</label>
                 <p>{props.currentUser.bio}</p>
-                <Button variant="primary">Edit Profile</Button>
+
+                <LinkContainer to="/editprofile">
+                    <Button variant="primary">Edit Profile</Button>
+                </LinkContainer>
             </Col>
+
             <Col sm={4} className="profile-preferences">
                 <h3>Your Match Preferences</h3>
                 <p><strong>Age Range:</strong><br></br> 
                 {props.currentUser.preference.min_age} to {props.currentUser.preference.max_age}</p>
-                <label><strong>Pets Preferences:</strong></label>
+                <label><strong>Pet Preferences:</strong></label>
                 <ul className="profile-pets-pref-list">
                     {props.currentUser.preference.wants_dog ? <li>Dog</li> : null}
                     {props.currentUser.preference.wants_cat ? <li>Cat</li> : null}
@@ -40,6 +47,10 @@ const UserProfileDetails = (props) => {
                     {props.currentUser.preference.wants_non_binary ? <li>Non-binary</li> : null}
                     {props.currentUser.preference.wants_other ? <li>Other</li> : null}
                 </ul>
+
+                <LinkContainer to="/preferences">
+                    <Button variant="primary">Edit Preferences</Button>
+                </LinkContainer>
             </Col>
         </Row>
     );
