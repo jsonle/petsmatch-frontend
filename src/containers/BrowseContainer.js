@@ -42,8 +42,20 @@ class BrowseContainer extends Component {
         .then(resp => resp.json())
         .then(data => {
             console.log('data', data)
+            var matched  = false
+            data.received_matches.map( (match) => {
+                if(match.user_one.id === this.props.currentUser.id) {
+                    matched =  true
+                }
+            })
+            data.started_matches.map( (match) => {
+                if(match.user_two.id === this.props.currentUser.id) {
+                    matched =  true
+                }
+            })
             this.setState({
-                displayedUser: data
+                displayedUser: data,
+                isMatchedWithDisplayed: matched
             })
         })
     }

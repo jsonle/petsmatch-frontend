@@ -49,13 +49,7 @@ class App extends React.Component {
   onSignUpSubmit = (signUpData) => {
     let configObj = {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify({
-            user: signUpData
-        })
+        body: signUpData
     }
 
     fetch('http://localhost:3000/users', configObj)
@@ -92,29 +86,19 @@ class App extends React.Component {
   }
 
   onAddPetSubmit = (newPetData) => {
-
+    newPetData.append('user_id', this.state.currentUser.id)
+    console.log(newPetData)
     let configObj = {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
         "Authorization": 'Bearer ' + localStorage.getItem("jwt")
       },
-      body: JSON.stringify({
-        pet: {
-          name: newPetData.name,
-          age: newPetData.age,
-          pet_type: newPetData.pet_type,
-          category: newPetData.category,
-          user_id: this.state.currentUser.id
-        }
-      })
+      body: newPetData
     }
 
     fetch('http://localhost:3000/pets', configObj)
     .then(response => response.json())
     .then(response => {
-      console.log(response);
       this.setState({
         currentUser: response.user
       })
