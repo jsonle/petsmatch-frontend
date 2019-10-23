@@ -39,7 +39,6 @@ class AddPetsContainer extends Component {
 
     handleEditPreferencesClick = event => {
         event.preventDefault();
-        this.props.onAddPetSubmit(this.state);
         this.props.history.push('/preferences');
     }
 

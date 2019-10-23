@@ -62,12 +62,34 @@ class App extends React.Component {
     fetch('http://localhost:3000/users', configObj)
     .then(response => response.json())
     .then(response => {
+      this.createNewPreference(response.user.id)
+      return response
+    })
+    .then(response => {
         console.log(response);
         localStorage.setItem("jwt", response.jwt);
         this.setState({
           currentUser: response.user
         })
     })
+  }
+
+  createNewPreference = (userId) => {
+    
+    let configObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        user_id: userId
+      })
+    }
+
+    fetch('http://localhost:3000/preferences', configObj)
+    .then(response => response.json())
+    .then(response => console.log(response))
   }
 
   onAddPetSubmit = (newPetData) => {
@@ -102,7 +124,7 @@ class App extends React.Component {
 
   onPreferencesSubmit = (prefData) => {
     let configObj = {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
@@ -113,7 +135,7 @@ class App extends React.Component {
       })
     }
 
-    fetch('http://localhost:3000/preferences', configObj)
+    fetch(`http://localhost:3000/preferences/${this.state.currentUser.preference.id}`, configObj)
     .then(response => response.json())
     .then(response => {
       this.setState({
@@ -143,7 +165,7 @@ class App extends React.Component {
             </Route>
             <Route exact path="/signup" render={(routeProps) => <SignUpContainer {...routeProps} onSignUpSubmit={this.onSignUpSubmit}/>}/>
 
-            {this.state.currentUser ? <Route exact path="/addpets" render={(routeProps) => <AddPetsContainer {...routeProps} currentUser={this.state.currentUser} onAddPetSubmit={this.onAddPetSubmit}/>}/> : <Redirect from='/addpets' to='/' />}
+            <Route exact path="/addpets" render={(routeProps) => <AddPetsContainer {...routeProps} currentUser={this.state.currentUser} onAddPetSubmit={this.onAddPetSubmit}/>}/>
 
             {this.state.currentUser ? <Route exact path="/preferences" render={(routeProps) => <PreferencesContainer {...routeProps} currentUser={this.state.currentUser} onPreferencesSubmit={this.onPreferencesSubmit} />}/> : <Redirect from='/preferences' to='/' />}
 

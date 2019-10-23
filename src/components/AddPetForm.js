@@ -40,7 +40,7 @@ const AddPetForm = (props) => {
 
             <Form.Row>
                 <Button variant="primary" type="submit" onClick={props.handleAddAnotherPetClick}>
-                    Add another pet!
+                    Save and add another pet!
                 </Button>
                 <Button variant="primary" type="submit" onClick={props.handleEditPreferencesClick}>
                     Edit your preferences!
