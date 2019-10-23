@@ -6,6 +6,7 @@ import ProfileContainer from './containers/ProfileContainer';
 import SignUpContainer from './containers/SignUpContainer';
 import ChatContainer from './containers/ChatContainer';
 import AddPetsContainer from './containers/AddPetsContainer';
+import PreferencesContainer from './containers/PreferencesContainer';
 import { BrowserRouter as Router,
   Switch,
   Route,
@@ -67,8 +68,6 @@ class App extends React.Component {
           currentUser: response.user
         })
     })
-    .then(response => {
-    })
   }
 
   onAddPetSubmit = (newPetData) => {
@@ -98,6 +97,10 @@ class App extends React.Component {
     })
   }
 
+  onPreferencesSubmit = (prefData) => {
+
+  }
+
   handleLogout = () => {
     localStorage.removeItem("jwt");
     this.setState({
@@ -118,8 +121,13 @@ class App extends React.Component {
               <ProfileContainer />
             </Route>
             <Route exact path="/signup" render={(routeProps) => <SignUpContainer {...routeProps} onSignUpSubmit={this.onSignUpSubmit}/>}/>
+
             <Route exact path="/addpets" render={(routeProps) => <AddPetsContainer {...routeProps} currentUser={this.state.currentUser} onAddPetSubmit={this.onAddPetSubmit}/>}/>
+
+            <Route exact path="/preferences" render={(routeProps) => <PreferencesContainer {...routeProps} currentUser={this.state.currentUser} onPreferencesSubmit={this.onPreferencesSubmit} />}/>
+
             {this.state.currentUser ? <Route exact path="/chat"><ChatContainer currentUser={this.state.currentUser} /></Route> : <Redirect from='/chat' to='/'/>}
+
             {this.state.currentUser ? <Route exact path="/browse"><BrowseContainer currentUser={this.state.currentUser}/></Route> : <Redirect from='/browse/' exact to='/'/>}
           </Switch>
         </div>
