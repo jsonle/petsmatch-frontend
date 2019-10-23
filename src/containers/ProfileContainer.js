@@ -12,20 +12,6 @@ class ProfileContainer extends Component {
         myMatches: [...this.props.currentUser.started_matches, ...this.props.currentUser.received_matches]
     }
 
-    // renderMatchCards = () => {
-    //     if (this.state.myMatches.length > 0) {
-    //         return <MatchList matches={this.state.myMatches} />
-    //     } else if (this.state.myMatches === 0) {
-    //         return (<>
-    //             <h3>You have no matches!</h3>
-    //             <LinkContainer to='/browse'>
-    //                 <Button variant="primary">Start Browsing!</Button>
-    //             </LinkContainer>
-    //             </>)
-    //     }
-    // }
-
-
     render() { 
         console.log("ProfileContainer Matches", this.state.myMatches.length);
         return (
@@ -34,7 +20,7 @@ class ProfileContainer extends Component {
                 <Row>
                     {this.state.myMatches.length === 0 ? 
                         <div>
-                        <h3>You have no matches!</h3>
+                        <p><strong>You have no matches!</strong></p>
                         <LinkContainer to='/browse'>
                             <Button variant="primary">Start Browsing!</Button>
                         </LinkContainer>
