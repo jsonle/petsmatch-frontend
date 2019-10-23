@@ -47,7 +47,6 @@ class App extends React.Component {
   }
 
   onSignUpSubmit = (signUpData) => {
-
     let configObj = {
         method: "POST",
         headers: {
@@ -158,7 +157,7 @@ class App extends React.Component {
           <NavbarContainer onLoginSubmit={this.onLoginSubmit} currentUser={this.state.currentUser} handleLogout={this.handleLogout}/>
           <Switch>
             <Route exact path="/">
-              <HomeContainer />
+              <HomeContainer currentUser={this.state.currentUser} />
             </Route>
             <Route exact path="/profile">
               <ProfileContainer />
