@@ -49,9 +49,6 @@ ul {
   flex-direction: column-reverse;
 }
 
-.navbar {
-  margin-bottom: 20px;
-}
 .carousel-fade {
   width: 50%;
   margin-right: auto;
@@ -119,7 +116,14 @@ ul {
   margin-left: auto
 }
 
+#browse-filter {
+  position: fixed;
+  width: 20%;
+  left: 0%;
+}
 
-
+.match-card {
+  display: inline-block;
+}
 
 
