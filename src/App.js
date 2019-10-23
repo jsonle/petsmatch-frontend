@@ -80,7 +80,6 @@ class App extends React.Component {
       return response
     })
     .then(response => {
-        console.log(response);
         localStorage.setItem("jwt", response.jwt);
         this.fetchCurrentUser(response.user.id)
     })
@@ -101,7 +100,7 @@ class App extends React.Component {
 
     fetch('http://localhost:3000/preferences', configObj)
     .then(response => response.json())
-    .then(response => console.log(response))
+    .then(response => console.log("New preference successfully created", response))
   }
 
   onAddPetSubmit = (newPetData) => {
@@ -127,7 +126,6 @@ class App extends React.Component {
     fetch('http://localhost:3000/pets', configObj)
     .then(response => response.json())
     .then(response => {
-      console.log(response);
       this.fetchCurrentUser(response.user.id)
     })
   }
@@ -168,9 +166,8 @@ class App extends React.Component {
             <Route exact path="/">
               <HomeContainer currentUser={this.state.currentUser} />
             </Route>
-            <Route exact path="/profile">
-              <ProfileContainer />
-            </Route>
+            {this.state.currentUser ? <Route exact path="/profile"><ProfileContainer currentUser={this.state.currentUser}/></Route> : <Redirect from='/profile' to='/'/>}
+            
             <Route exact path="/signup" render={(routeProps) => <SignUpContainer {...routeProps} onSignUpSubmit={this.onSignUpSubmit}/>}/>
 
             <Route exact path="/addpets" render={(routeProps) => <AddPetsContainer {...routeProps} currentUser={this.state.currentUser} onAddPetSubmit={this.onAddPetSubmit}/>}/>

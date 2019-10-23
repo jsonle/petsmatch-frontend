@@ -4,8 +4,8 @@ import PreferencesForm from '../components/PreferencesForm';
 class PreferencesContainer extends Component {
 
     state = {
-        min_age: this.props.currentUser.preference.min_age || "",
-        max_age: this.props.currentUser.preference.max_age || "",
+        min_age: this.props.currentUser.preference.min_age,
+        max_age: this.props.currentUser.preference.max_age,
         wants_men: this.props.currentUser.preference.wants_men,
         wants_women: this.props.currentUser.preference.wants_women,
         wants_other: this.props.currentUser.preference.wants_other,
