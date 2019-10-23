@@ -37,6 +37,11 @@ class AddPetsContainer extends Component {
         })
     }
 
+    handleEditPreferencesClick = event => {
+        event.preventDefault();
+        this.props.history.push('/preferences');
+    }
+
     render() { 
         return (
             <div className="add-pets-container">
@@ -44,6 +49,7 @@ class AddPetsContainer extends Component {
                  handlePetFormChange={this.handlePetFormChange}
                  handleAddPetSubmit={this.handleAddPetSubmit}
                  handleAddAnotherPetClick={this.handleAddAnotherPetClick}
+                 handleEditPreferencesClick={this.handleEditPreferencesClick}
                  currentInput={this.state}
                  />
             </div>

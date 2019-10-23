@@ -6,6 +6,7 @@ import ProfileContainer from './containers/ProfileContainer';
 import SignUpContainer from './containers/SignUpContainer';
 import ChatContainer from './containers/ChatContainer';
 import AddPetsContainer from './containers/AddPetsContainer';
+import PreferencesContainer from './containers/PreferencesContainer';
 import { BrowserRouter as Router,
   Switch,
   Route,
@@ -60,14 +61,34 @@ class App extends React.Component {
     fetch('http://localhost:3000/users', configObj)
     .then(response => response.json())
     .then(response => {
+      this.createNewPreference(response.user.id)
+      return response
+    })
+    .then(response => {
         console.log(response);
         localStorage.setItem("jwt", response.jwt);
         this.setState({
           currentUser: response.user
         })
     })
-    .then(response => {
-    })
+  }
+
+  createNewPreference = (userId) => {
+    
+    let configObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        user_id: userId
+      })
+    }
+
+    fetch('http://localhost:3000/preferences', configObj)
+    .then(response => response.json())
+    .then(response => console.log(response))
   }
 
   onAddPetSubmit = (newPetData) => {
@@ -94,6 +115,31 @@ class App extends React.Component {
     .then(response => response.json())
     .then(response => {
       console.log(response);
+      this.setState({
+        currentUser: response.user
+      })
+    })
+  }
+
+  onPreferencesSubmit = (prefData) => {
+    let configObj = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": 'Bearer ' + localStorage.getItem("jwt")
+      },
+      body: JSON.stringify({
+        preference: prefData
+      })
+    }
+
+    fetch(`http://localhost:3000/preferences/${this.state.currentUser.preference.id}`, configObj)
+    .then(response => response.json())
+    .then(response => {
+      this.setState({
+        currentUser: response.user
+      })
     })
   }
 
@@ -117,8 +163,13 @@ class App extends React.Component {
               <ProfileContainer />
             </Route>
             <Route exact path="/signup" render={(routeProps) => <SignUpContainer {...routeProps} onSignUpSubmit={this.onSignUpSubmit}/>}/>
+
             <Route exact path="/addpets" render={(routeProps) => <AddPetsContainer {...routeProps} currentUser={this.state.currentUser} onAddPetSubmit={this.onAddPetSubmit}/>}/>
+
+            {this.state.currentUser ? <Route exact path="/preferences" render={(routeProps) => <PreferencesContainer {...routeProps} currentUser={this.state.currentUser} onPreferencesSubmit={this.onPreferencesSubmit} />}/> : <Redirect from='/preferences' to='/' />}
+
             {this.state.currentUser ? <Route exact path="/chat"><ChatContainer currentUser={this.state.currentUser} /></Route> : <Redirect from='/chat' to='/'/>}
+
             {this.state.currentUser ? <Route exact path="/browse"><BrowseContainer currentUser={this.state.currentUser}/></Route> : <Redirect from='/browse/' exact to='/'/>}
           </Switch>
         </div>
