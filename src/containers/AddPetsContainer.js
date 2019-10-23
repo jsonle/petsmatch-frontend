@@ -31,18 +31,19 @@ class AddPetsContainer extends Component {
         this.setState({
             name: "",
             age: "",
-            breed: "",
-            species: "",
+            pet_type: "",
             category: "dog",
         })
     }
 
     handleEditPreferencesClick = event => {
         event.preventDefault();
+        this.props.onAddPetSubmit(this.state);
         this.props.history.push('/preferences');
     }
 
     render() { 
+        console.log(this.state.pet_type)
         return (
             <div className="add-pets-container">
                 <AddPetForm 

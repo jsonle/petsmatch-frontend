@@ -38,10 +38,25 @@ class App extends React.Component {
     fetch('http://localhost:3000/login', configObj)
     .then(response => response.json())
     .then(response => {
-      console.log(response);
       localStorage.setItem("jwt", response.jwt);
+      this.fetchCurrentUser(response.user.id)
+    })
+  }
+
+  fetchCurrentUser = (userId) => {
+    let configObj = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+      }
+    }
+
+    fetch(`http://localhost:3000/profile/${userId}`, configObj)
+    .then(response => response.json())
+    .then(response => {
+      console.log(response);
       this.setState({
-        currentUser: response.user
+        currentUser: response
       })
     })
   }
@@ -67,9 +82,7 @@ class App extends React.Component {
     .then(response => {
         console.log(response);
         localStorage.setItem("jwt", response.jwt);
-        this.setState({
-          currentUser: response.user
-        })
+        this.fetchCurrentUser(response.user.id)
     })
   }
 
@@ -115,9 +128,7 @@ class App extends React.Component {
     .then(response => response.json())
     .then(response => {
       console.log(response);
-      this.setState({
-        currentUser: response.user
-      })
+      this.fetchCurrentUser(response.user.id)
     })
   }
 
@@ -137,9 +148,7 @@ class App extends React.Component {
     fetch(`http://localhost:3000/preferences/${this.state.currentUser.preference.id}`, configObj)
     .then(response => response.json())
     .then(response => {
-      this.setState({
-        currentUser: response.user
-      })
+      this.fetchCurrentUser(response.user.id)
     })
   }
 
