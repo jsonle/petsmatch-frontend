@@ -40,7 +40,7 @@ class PreferencesContainer extends Component {
 
     handleDoneClick = event => {
         event.preventDefault();
-        this.props.history.push('/');
+        this.props.history.push('/profile');
     }
 
     render() { 

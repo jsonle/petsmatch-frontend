@@ -40,7 +40,7 @@ const PreferencesForm = (props) => {
                         Save preferences
                     </Button>
                     <Button variant="primary" type="submit" onClick={props.handleDoneClick}>
-                        Done
+                        View Profile
                     </Button>
                 </Form.Group>
             </Form.Row>
