@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import UserStats from '../components/UserStats'
+import FilterMenu from '../components/FilterMenu'
 
 
 class BrowseContainer extends Component {
     state = { 
         users: [],
         displayedUser: undefined,
-        displayedPets: [],
         isMatchedWithDisplayed: false
      }
 
@@ -41,30 +41,9 @@ class BrowseContainer extends Component {
         })
         .then(resp => resp.json())
         .then(data => {
-            let matched  = false
-            data.matches.map( (match) => {
-                if(match.user_one_id === this.props.currentUser.id || match.user_two_id === this.props.currentUser.id ) {
-                    matched =  true
-                }
-            })
+            console.log('data', data)
             this.setState({
-                displayedUser: data,
-                displayedPets: [],
-                isMatchedWithDisplayed: matched
-            })
-            data.pets.map( (pet) => {
-                fetch(`http://localhost:3000/pets/${pet.id}`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + localStorage.getItem("jwt")
-                    },
-                })
-                .then(resp => resp.json())
-                .then(data => {
-                    this.setState({
-                        displayedPets: [...this.state.displayedPets, data]
-                    })
-                })
+                displayedUser: data
             })
         })
     }
@@ -115,7 +94,6 @@ class BrowseContainer extends Component {
         } else {
             this.createMatch(id)
         }
-
     }
 
     renderMatchImage = () => {
@@ -130,12 +108,13 @@ class BrowseContainer extends Component {
         return (
             <div>
                 <div id='browse-slider'>
+                        <FilterMenu />
                     <div id='slider-inner'>
                         {this.renderUserCards()}
                     </div>
                 </div>
                 <div id='stats-container'>
-                    {this.state.displayedUser && <UserStats renderMatchImage={this.renderMatchImage} isMatchedWithDisplayed={this.state.isMatchedWithDisplayed} handleMatchClick={this.handleMatchClick} displayedPets={this.state.displayedPets} displayedUser={this.state.displayedUser} />}
+                    {this.state.displayedUser && <UserStats renderMatchImage={this.renderMatchImage} isMatchedWithDisplayed={this.state.isMatchedWithDisplayed} handleMatchClick={this.handleMatchClick} displayedUser={this.state.displayedUser} />}
                 </div>
             </div>
          );
