@@ -98,7 +98,21 @@ class App extends React.Component {
   }
 
   onPreferencesSubmit = (prefData) => {
+    let configObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": 'Bearer ' + localStorage.getItem("jwt")
+      },
+      body: JSON.stringify({
+        preference: prefData
+      })
+    }
 
+    fetch('http://localhost:3000/preferences', configObj)
+    .then(response => response.json())
+    .then(response => console.log(response))
   }
 
   handleLogout = () => {

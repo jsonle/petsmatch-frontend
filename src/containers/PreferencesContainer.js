@@ -16,7 +16,7 @@ class PreferencesContainer extends Component {
         wants_reptile: false,
         wants_exotic: false,
         wants_rodent: false,
-        // user_id: this.props.currentUser.id
+        user_id: this.props.currentUser.id
     }
 
     handleCheckBoxClick = event => {
@@ -31,19 +31,25 @@ class PreferencesContainer extends Component {
         })
     }
 
+    handlePreferencesSave = event => {
+        event.preventDefault();
+        this.props.onPreferencesSubmit(this.state);
+    }
+
     handlePreferencesSubmit = event => {
         event.preventDefault();
         this.props.onPreferencesSubmit(this.state);
-        // this.props.history.push('/');
+        this.props.history.push('/');
     }
 
     render() { 
+        console.log(this.state)
         return (
             <div>
                 <PreferencesForm 
                     handlePreferencesSubmit={this.handlePreferencesSubmit} 
                     handleCheckBoxClick={this.handleCheckBoxClick}
-                    handlePreferencesChange={this.handlePreferenceChange}
+                    handlePreferencesChange={this.handlePreferencesChange}
                 />
             </div>
         );
