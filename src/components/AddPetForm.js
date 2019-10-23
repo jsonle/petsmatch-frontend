@@ -36,6 +36,10 @@ const AddPetForm = (props) => {
                     <Form.Label>Pet Type</Form.Label>
                     <Form.Control type="text" name="pet_type" onChange={props.handlePetFormChange} placeholder="ex. Corgi" value={props.currentInput.pet_type}/>
                 </Form.Group>
+                <Form.Group as={Col} controlId="formGridPicture">
+                    <Form.Label>Upload Picture</Form.Label>
+                    <Form.Control type="file" name="image" onChange={props.handleFileChange} />
+                </Form.Group>
             </Form.Row>
 
             <Form.Row>

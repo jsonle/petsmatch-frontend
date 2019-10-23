@@ -62,10 +62,8 @@ const SignUpForm = (props) => {
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridPicture">
                     <Form.Label>Upload Picture</Form.Label>
-                    <Form.Control type="text" name="image" onChange={props.handleFormChange} />
+                    <Form.Control type="file" name="image" onChange={props.handleFileChange} />
                 </Form.Group>
-
- 
             </Form.Row>
             
             <Button variant="primary" type="submit" onClick={props.handleSignUpSubmit}>
