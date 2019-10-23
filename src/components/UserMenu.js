@@ -11,6 +11,9 @@ const UserMenu = ({ currentUser, handleLogout }) => {
             <LinkContainer to={`/addpets`}>
                 <Dropdown.Item >Add Pets</Dropdown.Item>
             </LinkContainer>
+            <LinkContainer to="/preferences">
+                <Dropdown.Item>Edit Preferences</Dropdown.Item>
+            </LinkContainer>
             <LinkContainer to="/browse">
                 <Dropdown.Item>Browse</Dropdown.Item>
             </LinkContainer>

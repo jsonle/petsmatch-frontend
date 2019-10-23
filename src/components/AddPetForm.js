@@ -42,6 +42,9 @@ const AddPetForm = (props) => {
                 <Button variant="primary" type="submit" onClick={props.handleAddAnotherPetClick}>
                     Add another pet!
                 </Button>
+                <Button variant="primary" type="submit" onClick={props.handleEditPreferencesClick}>
+                    Edit your preferences!
+                </Button>
                 <Button variant="primary" type="submit" onClick={props.handleAddPetSubmit}>
                     Done
                 </Button>
