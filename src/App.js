@@ -94,6 +94,9 @@ class App extends React.Component {
     .then(response => response.json())
     .then(response => {
       console.log(response);
+      this.setState({
+        currentUser: response.user
+      })
     })
   }
 
@@ -112,7 +115,11 @@ class App extends React.Component {
 
     fetch('http://localhost:3000/preferences', configObj)
     .then(response => response.json())
-    .then(response => console.log(response))
+    .then(response => {
+      this.setState({
+        currentUser: response.user
+      })
+    })
   }
 
   handleLogout = () => {
@@ -136,9 +143,9 @@ class App extends React.Component {
             </Route>
             <Route exact path="/signup" render={(routeProps) => <SignUpContainer {...routeProps} onSignUpSubmit={this.onSignUpSubmit}/>}/>
 
-            <Route exact path="/addpets" render={(routeProps) => <AddPetsContainer {...routeProps} currentUser={this.state.currentUser} onAddPetSubmit={this.onAddPetSubmit}/>}/>
+            {this.state.currentUser ? <Route exact path="/addpets" render={(routeProps) => <AddPetsContainer {...routeProps} currentUser={this.state.currentUser} onAddPetSubmit={this.onAddPetSubmit}/>}/> : <Redirect from='/addpets' to='/' />}
 
-            <Route exact path="/preferences" render={(routeProps) => <PreferencesContainer {...routeProps} currentUser={this.state.currentUser} onPreferencesSubmit={this.onPreferencesSubmit} />}/>
+            {this.state.currentUser ? <Route exact path="/preferences" render={(routeProps) => <PreferencesContainer {...routeProps} currentUser={this.state.currentUser} onPreferencesSubmit={this.onPreferencesSubmit} />}/> : <Redirect from='/preferences' to='/' />}
 
             {this.state.currentUser ? <Route exact path="/chat"><ChatContainer currentUser={this.state.currentUser} /></Route> : <Redirect from='/chat' to='/'/>}
 
