@@ -8,6 +8,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 const UserProfileDetails = (props) => {
     return (
         <Col sm={4} className="user-profile-column">
+            <h3>You</h3>
             <div className="profile-image">
                 {props.currentUser.image ? <img src={props.currentUser.image.url} alt=""></img> : <h2>No Image Found</h2>} 
             </div>
