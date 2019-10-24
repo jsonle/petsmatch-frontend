@@ -13,7 +13,6 @@ class ProfileContainer extends Component {
     }
 
     render() { 
-        console.log("ProfileContainer Matches", this.state.myMatches.length);
         return (
             <Container className="profile-container">
                 <UserProfileDetails currentUser={this.props.currentUser}/>
