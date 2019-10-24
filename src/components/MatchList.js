@@ -11,13 +11,9 @@ class MatchList extends Component {
     }
 
     render() {
-        // console.log('matchlist props', this.props)
         return ( 
             <div id='my-matches'>
-                <div>   
-                    {this.props.matches.map( (match) => <MatchedUserCard match={match} /> )}
-                </div>
-                
+                    {this.props.matches.map( (match, index) => <MatchedUserCard match={match} key={index}/> )}
             </div>
          );
     }

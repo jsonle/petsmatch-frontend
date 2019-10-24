@@ -73,10 +73,17 @@ ul {
   margin-right: auto;
 }
 
-.pet-card {
+.match-card > .list-group-flush > .list-group-item > .pet-list-container > .pet-list-row > .pet-card {
   display: inline-block;
-  width: 10%;
-  margin: 5%
+  width: 45%;
+  margin-left: 5%;
+  box-shadow: none;
+}
+
+#pet-card-inner > .pet-card {
+  display: inline-block;
+  width: 20%;
+  margin: 1%;
 }
 
 #pet-card-inner {
