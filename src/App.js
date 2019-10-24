@@ -8,6 +8,7 @@ import SignUpContainer from './containers/SignUpContainer';
 import ChatContainer from './containers/ChatContainer';
 import AddPetsContainer from './containers/AddPetsContainer';
 import PreferencesContainer from './containers/PreferencesContainer';
+import EditProfileContainer from './containers/EditProfileContainer';
 import { BrowserRouter as Router,
   Switch,
   Route,
@@ -16,9 +17,18 @@ import './App.scss';
 
 
 
+
 class App extends React.Component {
   state = {
     currentUser: null
+  }
+
+  componentDidMount() {
+    const localUserId = localStorage.getItem("userId");
+
+    if (localUserId) {
+      this.fetchCurrentUser(localUserId);
+    }
   }
 
   onLoginSubmit = (formData) => {
@@ -39,7 +49,9 @@ class App extends React.Component {
     fetch('http://localhost:3000/login', configObj)
     .then(response => response.json())
     .then(response => {
+      console.log(response);
       localStorage.setItem("jwt", response.jwt);
+      localStorage.setItem("userId", response.user.id);
       this.fetchCurrentUser(response.user.id)
     })
   }
@@ -75,6 +87,7 @@ class App extends React.Component {
     })
     .then(response => {
         localStorage.setItem("jwt", response.jwt);
+        localStorage.setItem("userId", response.user.id);
         this.fetchCurrentUser(response.user.id)
     })
     .catch(err => {
@@ -136,14 +149,34 @@ class App extends React.Component {
     })
   }
 
+  onEditProfileSave = (formData) => {
+    const currentId = localStorage.getItem("userId");
+
+    let configObj = {
+      method: "PATCH",
+      headers: {
+        "Authorization": 'Bearer ' + localStorage.getItem("jwt")
+      },
+      body: formData
+    }
+    fetch(`http://localhost:3000/users/${currentId}`, configObj)
+    .then(response => response.json())
+    .then(response => {
+      console.log(response);
+      this.fetchCurrentUser(currentId);
+    })
+  }
+
   handleLogout = () => {
     localStorage.removeItem("jwt");
+    localStorage.removeItem("userId");
     this.setState({
       currentUser: null
     })
   }
 
   render() {
+    console.log(this.state.currentUser);
     return (
       <Router>
         <div className="App">
@@ -153,6 +186,8 @@ class App extends React.Component {
               <HomeContainer currentUser={this.state.currentUser} />
             </Route>
             {this.state.currentUser ? <Route exact path="/profile"><ProfileContainer currentUser={this.state.currentUser}/></Route> : <Redirect from='/profile' to='/'/>}
+
+            {this.state.currentUser ? <Route exact path="/editprofile" render={(routeProps) => <EditProfileContainer {...routeProps} currentUser={this.state.currentUser} onEditProfileSave={this.onEditProfileSave}/>}/> : <Redirect from='/editprofile' to='/'/>}
             
             <Route exact path="/signup" render={(routeProps) => <SignUpContainer {...routeProps} onSignUpSubmit={this.onSignUpSubmit}/>}/>
 

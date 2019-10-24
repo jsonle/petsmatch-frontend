@@ -28,7 +28,13 @@ class AddPetsContainer extends Component {
 
     handleAddPetSubmit = event => {
         event.preventDefault();
-        this.props.onAddPetSubmit(this.state);
+        const formData = new FormData();
+        formData.append('name', this.state.name)
+        formData.append('age', this.state.age)
+        formData.append('pet_type', this.state.pet_type)
+        formData.append('category', this.state.category)
+        formData.append('image', this.state.image)
+        this.props.onAddPetSubmit(formData);
         this.props.history.push('/');
     }
 
@@ -53,7 +59,13 @@ class AddPetsContainer extends Component {
 
     handleEditPreferencesClick = event => {
         event.preventDefault();
-        this.props.onAddPetSubmit(this.state);
+        const formData = new FormData();
+        formData.append('name', this.state.name)
+        formData.append('age', this.state.age)
+        formData.append('pet_type', this.state.pet_type)
+        formData.append('category', this.state.category)
+        formData.append('image', this.state.image)
+        this.props.onAddPetSubmit(formData);
         this.props.history.push('/preferences');
     }
 

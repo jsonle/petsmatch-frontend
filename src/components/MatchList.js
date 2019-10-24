@@ -11,7 +11,7 @@ class MatchList extends Component {
     }
 
     render() {
-        console.log('matchlist props', this.props)
+        // console.log('matchlist props', this.props)
         return ( 
             <div id='my-matches'>
                 <div>   
