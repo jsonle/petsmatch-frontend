@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
 import UserMenu from '../components/UserMenu';
 import Navbar from 'react-bootstrap/Navbar';

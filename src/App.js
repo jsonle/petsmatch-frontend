@@ -7,12 +7,14 @@ import SignUpContainer from './containers/SignUpContainer';
 import ChatContainer from './containers/ChatContainer';
 import AddPetsContainer from './containers/AddPetsContainer';
 import PreferencesContainer from './containers/PreferencesContainer';
+import EditProfileContainer from './containers/EditProfileContainer';
 import { BrowserRouter as Router,
   Switch,
   Route,
   Redirect} from 'react-router-dom';
 import './App.scss';
 import { thisExpression } from '@babel/types';
+
 
 class App extends React.Component {
   state = {
@@ -163,6 +165,7 @@ class App extends React.Component {
               <HomeContainer currentUser={this.state.currentUser} />
             </Route>
             {this.state.currentUser ? <Route exact path="/profile"><ProfileContainer currentUser={this.state.currentUser}/></Route> : <Redirect from='/profile' to='/'/>}
+            {this.state.currentUser ? <Route exact path="/editprofile"><EditProfileContainer currentUser={this.state.currentUser}/></Route> : <Redirect from='/editprofile' to='/'/>}
             
             <Route exact path="/signup" render={(routeProps) => <SignUpContainer {...routeProps} onSignUpSubmit={this.onSignUpSubmit}/>}/>
 
