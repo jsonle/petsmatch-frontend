@@ -11,7 +11,12 @@ class BrowseContainer extends Component {
      }
 
     componentDidMount() {
-        fetch('http://localhost:3000/users')
+        fetch(`http://localhost:3000/users/${this.props.currentUser.id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+            }
+        })
         .then(resp => resp.json())
         .then(data => {
             this.setState({
