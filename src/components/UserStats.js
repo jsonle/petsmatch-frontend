@@ -9,6 +9,7 @@ const UserStats = (props) => {
             <h1>{props.displayedUser.name}</h1>
             <h3>{props.displayedUser.age} - {props.displayedUser.gender}</h3>
             <p>{props.displayedUser.bio}</p>
+            {console.log(props.displayedUser.preference)}
             <div id='pet-card-container'>
                 <div id='pet-card-inner'>
                     {props.displayedUser.pets.map( (pet, index) => {
