@@ -73,10 +73,15 @@ ul {
   margin-right: auto;
 }
 
+.match-card > .list-group-flush > .list-group-item > .pet-list-container > .pet-list-row > .pet-card {
+  display: inline-block;
+  width: 45%;
+  margin-left: 5%
+}
+
 .pet-card {
   display: inline-block;
-  width: 30%;
-  margin: 15%
+
 }
 
 #pet-card-inner {

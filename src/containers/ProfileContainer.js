@@ -29,7 +29,10 @@ class ProfileContainer extends Component {
                         </LinkContainer>
                         </>
                         :
-                        <MatchList matches={this.state.myMatches} />}
+                        <>
+                        <h3>Your Matches</h3>
+                        <MatchList matches={this.state.myMatches} />
+                        </>}
                     </Col>
                 </Row>
             </Container>
