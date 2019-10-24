@@ -9,6 +9,7 @@ const UserProfileDetails = (props) => {
     return (
         <Row>
             <Col sm={2} className="profile-image">
+                {console.log(props)}
                 {props.currentUser.image ? <img src={props.currentUser.image.url} alt=""></img> : <h2>No Image Found</h2>} 
             </Col>
 
