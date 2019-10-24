@@ -24,7 +24,7 @@ class NavbarContainer extends Component {
         return ( 
             <Navbar className="navbar" bg="light" expand="lg">
                 <LinkContainer to="/">
-                    <Navbar.Brand>Petsmatch</Navbar.Brand>
+                    <Navbar.Brand><h1><span style={{color: '#287aed'}}>Pets</span><span style={{color: '#ee8712'}}>Match</span><img style={{width: '40px', marginTop: '0px'}} className='home-image' src={process.env.PUBLIC_URL + '/match-fire-pngrepo-com.png'}></img></h1></Navbar.Brand>
                 </LinkContainer>
                 
                 { this.props.currentUser ?  

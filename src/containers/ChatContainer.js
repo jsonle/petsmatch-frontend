@@ -199,7 +199,7 @@ class ChatContainer extends Component {
             <Row className='h-75 mt-3 ml-3 mr-3'>
                 <Col lg={4}>
                     <div className='h-75 border border-dark pt-1 pl-1 pr-1'>
-                        {this.state.showMatches ? <div className='overflow-auto'>{this.renderMatches()}</div> : <div>{this.renderChatList()}</div>}
+                        {this.state.showMatches ? <div className='overflow-auto'>{this.renderMatches()}</div> : <div><h3>Your Open Chats</h3>{this.renderChatList()}</div>}
                     </div>
                     <div className='mt-1'>
                         {!this.state.showMatches ? <button onClick={() => this.fetchMatches()}>Start a New Chat</button> : <button onClick={() => this.handleGoBack()}>Go Back</button>}
