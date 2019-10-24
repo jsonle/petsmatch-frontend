@@ -1,4 +1,5 @@
 import React from 'react';
+import { thisExpression } from '@babel/types';
 import NavbarContainer from './containers/NavbarContainer';
 import HomeContainer from './containers/HomeContainer';
 import BrowseContainer from './containers/BrowseContainer';
@@ -12,7 +13,8 @@ import { BrowserRouter as Router,
   Route,
   Redirect} from 'react-router-dom';
 import './App.scss';
-import { thisExpression } from '@babel/types';
+
+
 
 class App extends React.Component {
   state = {
@@ -20,7 +22,6 @@ class App extends React.Component {
   }
 
   onLoginSubmit = (formData) => {
-
     let configObj = {
       method: "POST",
       headers: {
@@ -54,7 +55,6 @@ class App extends React.Component {
     fetch(`http://localhost:3000/profile/${userId}`, configObj)
     .then(response => response.json())
     .then(response => {
-      console.log(response);
       this.setState({
         currentUser: response
       })
@@ -77,10 +77,12 @@ class App extends React.Component {
         localStorage.setItem("jwt", response.jwt);
         this.fetchCurrentUser(response.user.id)
     })
+    .catch(err => {
+      console.log('Error', err)
+    })
   }
 
   createNewPreference = (userId) => {
-    
     let configObj = {
       method: "POST",
       headers: {
@@ -99,7 +101,6 @@ class App extends React.Component {
 
   onAddPetSubmit = (newPetData) => {
     newPetData.append('user_id', this.state.currentUser.id)
-    console.log(newPetData)
     let configObj = {
       method: "POST",
       headers: {

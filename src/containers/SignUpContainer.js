@@ -28,7 +28,6 @@ class SignUpContainer extends Component {
      }
 
      handleFileChange = event => {
-         console.log(event.target.files[0])
          this.setState({
             [event.target.name]: event.target.files[0]
          })
@@ -36,7 +35,6 @@ class SignUpContainer extends Component {
 
      handleSignUpSubmit = event => {
          event.preventDefault();
-         console.log(this.state)
          const formData = new FormData();
          formData.append('name', this.state.name)
          formData.append('email', this.state.email)
@@ -46,9 +44,14 @@ class SignUpContainer extends Component {
          formData.append('gender', this.state.gender)
          formData.append('bio', this.state.bio)
          formData.append('zipcode', this.state.zipcode)
-         formData.append('image', this.state.image)
-         this.props.onSignUpSubmit(formData);
-         this.props.history.push('/addpets');
+         this.state.image && formData.append('image', this.state.image)
+         if(this.state.image) {
+            this.props.onSignUpSubmit(formData);
+            this.props.history.push('/addpets');
+         } else {
+             console.log('NO PAGE')
+         }
+
      }
 
     render() { 
