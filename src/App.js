@@ -19,6 +19,14 @@ class App extends React.Component {
     currentUser: null
   }
 
+  componentDidMount() {
+    const localUserId = localStorage.getItem("userId");
+
+    if (localUserId) {
+      this.fetchCurrentUser(localUserId);
+    }
+  }
+
   onLoginSubmit = (formData) => {
 
     let configObj = {
@@ -38,7 +46,9 @@ class App extends React.Component {
     fetch('http://localhost:3000/login', configObj)
     .then(response => response.json())
     .then(response => {
+      console.log(response);
       localStorage.setItem("jwt", response.jwt);
+      localStorage.setItem("userId", response.user.id);
       this.fetchCurrentUser(response.user.id)
     })
   }
@@ -54,7 +64,6 @@ class App extends React.Component {
     fetch(`http://localhost:3000/profile/${userId}`, configObj)
     .then(response => response.json())
     .then(response => {
-      console.log(response);
       this.setState({
         currentUser: response
       })
@@ -75,6 +84,7 @@ class App extends React.Component {
     })
     .then(response => {
         localStorage.setItem("jwt", response.jwt);
+        localStorage.setItem("email", response.user.email);
         this.fetchCurrentUser(response.user.id)
     })
   }
@@ -143,6 +153,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.currentUser);
     return (
       <Router>
         <div className="App">
