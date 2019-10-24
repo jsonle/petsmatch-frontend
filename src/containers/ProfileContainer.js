@@ -5,6 +5,8 @@ import Container from 'react-bootstrap/Container';
 import { LinkContainer } from 'react-router-bootstrap';
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import PetsList from '../components/PetsList';
 
 
 class ProfileContainer extends Component {
@@ -15,17 +17,20 @@ class ProfileContainer extends Component {
     render() { 
         return (
             <Container className="profile-container">
-                <UserProfileDetails currentUser={this.props.currentUser}/>
                 <Row>
+                    <UserProfileDetails currentUser={this.props.currentUser}/>
+                    <PetsList pets={this.props.currentUser.pets}/>
+                    <Col sm={4} className="matches-list-column">
                     {this.state.myMatches.length === 0 ? 
-                        <div>
+                        <>
                         <p><strong>You have no matches!</strong></p>
                         <LinkContainer to='/browse'>
                             <Button variant="primary">Start Browsing!</Button>
                         </LinkContainer>
-                        </div>
+                        </>
                         :
                         <MatchList matches={this.state.myMatches} />}
+                    </Col>
                 </Row>
             </Container>
         );

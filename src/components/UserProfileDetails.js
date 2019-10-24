@@ -7,16 +7,16 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 const UserProfileDetails = (props) => {
     return (
-        <Row>
-            <Col sm={2} className="profile-image">
+        <Col sm={4} className="user-profile-column">
+            <div className="profile-image">
                 {props.currentUser.image ? <img src={props.currentUser.image.url} alt=""></img> : <h2>No Image Found</h2>} 
-            </Col>
+            </div>
 
-            <Col sm={6} className="profile-details">
+            <div className="profile-details">
                 <h3>{props.currentUser.name}</h3>
                 <p>Email: {props.currentUser.email}</p>
                 <p>Age: {props.currentUser.age}</p>
-                <p>Gender: {props.currentUser.gender}</p>
+                <p>Gender: {props.currentUser.gender[0].toUpperCase() + props.currentUser.gender.slice(1)}</p>
                 <p>Zipcode: {props.currentUser.zipcode}</p>
                 <label>Bio:</label>
                 <p>{props.currentUser.bio}</p>
@@ -24,9 +24,9 @@ const UserProfileDetails = (props) => {
                 <LinkContainer to="/editprofile">
                     <Button variant="primary">Edit Profile</Button>
                 </LinkContainer>
-            </Col>
+            </div>
 
-            <Col sm={4} className="profile-preferences">
+            <div className="profile-preferences">
                 <h3>Your Match Preferences</h3>
                 <p><strong>Age Range:</strong><br></br> 
                 {props.currentUser.preference.min_age} to {props.currentUser.preference.max_age}</p>
@@ -51,8 +51,8 @@ const UserProfileDetails = (props) => {
                 <LinkContainer to="/preferences">
                     <Button variant="primary">Edit Preferences</Button>
                 </LinkContainer>
-            </Col>
-        </Row>
+            </div>
+        </Col>
     );
 }
  

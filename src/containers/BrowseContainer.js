@@ -74,6 +74,7 @@ class BrowseContainer extends Component {
         })
         .then(resp => resp.json())
         .then(data => {
+            this.props.fetchCurrentUser(this.props.currentUser.id);
             this.setState({
                 isMatchedWithDisplayed: true
             })
@@ -94,6 +95,7 @@ class BrowseContainer extends Component {
         })
         .then(resp => resp.json())
         .then(data => {
+            this.props.fetchCurrentUser(this.props.currentUser.id);
             this.setState({
                 isMatchedWithDisplayed: false
             })

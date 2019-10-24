@@ -1,5 +1,6 @@
 import React from 'react';
-import PetsList from './PetsList'
+import PetsList from './PetsList';
+import PetCard from './PetCard';
 
 const UserStats = (props) => {
     return ( 
@@ -11,14 +12,7 @@ const UserStats = (props) => {
             <p>{props.displayedUser.bio}</p>
             <div id='pet-card-container'>
                 <div id='pet-card-inner'>
-                    {props.displayedUser.pets.map( (pet, index) => {
-                        return (
-                            <div key={index} className='pet-card w-10'>
-                                <img className='w-100' src={pet.image.url}></img>
-                                <p>{pet.name}</p>
-                            </div>
-                        )
-                    })}
+                    {props.displayedUser.pets.map( (pet, index) => <PetCard pet={pet} key={index} />)}
                 </div>
             </div>
         </div>

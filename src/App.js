@@ -195,7 +195,7 @@ class App extends React.Component {
 
             {this.state.currentUser ? <Route exact path="/chat"><ChatContainer currentUser={this.state.currentUser} /></Route> : <Redirect from='/chat' to='/'/>}
 
-            {this.state.currentUser ? <Route exact path="/browse"><BrowseContainer currentUser={this.state.currentUser}/></Route> : <Redirect from='/browse/' exact to='/'/>}
+            {this.state.currentUser ? <Route exact path="/browse"><BrowseContainer currentUser={this.state.currentUser} fetchCurrentUser={this.fetchCurrentUser}/></Route> : <Redirect from='/browse/' exact to='/'/>}
           </Switch>
         </div>
       </Router>

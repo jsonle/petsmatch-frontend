@@ -1,4 +1,5 @@
 import React from 'react';
+import PetCard from './PetCard';
 
 const MatchedUserCard = (props) => {
     console.log('matchedusercard props', props)
@@ -10,14 +11,7 @@ const MatchedUserCard = (props) => {
             <p>{props.match.user_two.bio}</p>
             <div id='pet-card-container'>
                 <div id='pet-card-inner'>
-                    {props.match.user_two.pets.map( (pet, index) => {
-                        return (
-                            <div key={index} className='pet-card w-10'>
-                                <img className='w-100' src={pet.image.url}></img>
-                                <p>{pet.name}</p>
-                            </div>
-                        )
-                    })}
+                    {props.match.user_two.pets.map( (pet, index) => <PetCard pet={pet} key={index} />)}
                 </div>
             </div>
         </div>

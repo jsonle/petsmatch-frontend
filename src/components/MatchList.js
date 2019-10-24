@@ -15,7 +15,7 @@ class MatchList extends Component {
         return ( 
             <div id='my-matches'>
                 <div>   
-                    {this.props.matches.map( (match) => <MatchedUserCard match={match} /> )}
+                    {this.props.matches.map( (match, index) => <MatchedUserCard match={match} key={index}/> )}
                 </div>
                 
             </div>
