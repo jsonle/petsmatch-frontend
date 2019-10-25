@@ -43,9 +43,11 @@ class HomeContainer extends Component {
 
     render() { 
         return ( 
-            <div>
+            <div className='container'>
                 {this.renderBigLogoAndName()}
-                {this.renderMatchCards()}
+                <div  id='home-matches' className='row'>
+                    {this.renderMatchCards()}
+                </div>
             </div>
          );
     }

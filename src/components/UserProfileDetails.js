@@ -15,12 +15,12 @@ const UserProfileDetails = (props) => {
 
             <div className="profile-details">
                 <h3>{props.currentUser.name}</h3>
-                <p>Email: {props.currentUser.email}</p>
-                <p>Age: {props.currentUser.age}</p>
-                <p>Gender: {props.currentUser.gender[0].toUpperCase() + props.currentUser.gender.slice(1)}</p>
-                <p>Zipcode: {props.currentUser.zipcode}</p>
-                <label>Bio:</label>
-                <p>{props.currentUser.bio}</p>
+                <strong>Email: </strong>{props.currentUser.email}<br></br>
+                <strong>Age: </strong>{props.currentUser.age}<br></br>
+                <strong>Gender: </strong>{props.currentUser.gender[0].toUpperCase() + props.currentUser.gender.slice(1)}<br></br>
+                <strong>Zipcode: </strong>{props.currentUser.zipcode}<br></br>
+                <strong id="bio">Bio</strong><br></br>
+                {props.currentUser.bio}<br></br>
 
                 <LinkContainer to="/editprofile">
                     <Button variant="primary">Edit Profile</Button>
@@ -29,19 +29,19 @@ const UserProfileDetails = (props) => {
 
             <div className="profile-preferences">
                 <h3>Your Match Preferences</h3>
-                <p><strong>Age Range:</strong><br></br> 
+                <p><strong>Age Range</strong><br></br> 
                 {props.currentUser.preference.min_age} to {props.currentUser.preference.max_age}</p>
-                <label><strong>Pet Preferences:</strong></label>
-                <ul className="profile-pets-pref-list">
-                    {props.currentUser.preference.wants_dog ? <li>Dog</li> : null}
-                    {props.currentUser.preference.wants_cat ? <li>Cat</li> : null}
-                    {props.currentUser.preference.wants_bird ? <li>Bird</li> : null}
-                    {props.currentUser.preference.wants_fish ? <li>Fish</li> : null}
-                    {props.currentUser.preference.wants_reptile ? <li>Reptile</li> : null}
-                    {props.currentUser.preference.wants_exotic ? <li>Exotic</li> : null}
-                    {props.currentUser.preference.wants_rodent ? <li>Rodent</li> : null}
+                <label><strong>Pet Preferences</strong></label>
+                <ul className="profile-pets-pref-list text-center">
+                    {props.currentUser.preference.wants_dog ? <li className='mr-2'>Dog</li> : null}
+                    {props.currentUser.preference.wants_cat ? <li className='mr-2'>Cat</li> : null}
+                    {props.currentUser.preference.wants_bird ? <li className='mr-2'>Bird</li> : null}
+                    {props.currentUser.preference.wants_fish ? <li className='mr-2'>Fish</li> : null}
+                    {props.currentUser.preference.wants_reptile ? <li className='mr-2'>Reptile</li> : null}
+                    {props.currentUser.preference.wants_exotic ? <li className='mr-2'>Exotic</li> : null}
+                    {props.currentUser.preference.wants_rodent ? <li className='mr-2'>Rodent</li> : null}
                 </ul>
-                <label><strong>Gender Preferences:</strong></label>
+                <label><strong>Gender Preferences</strong></label>
                 <ul className="profile-gender-pref-list">
                     {props.currentUser.preference.wants_men ? <li>Men</li> : null}
                     {props.currentUser.preference.wants_women ? <li>Women</li> : null}
