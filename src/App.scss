@@ -76,8 +76,9 @@ ul {
 .match-card > .list-group-flush > .list-group-item > .pet-list-container > .pet-list-row > .pet-card {
   display: inline-block;
   width: 45%;
-  margin-left: 5%;
+  // margin-left: 5%;
   box-shadow: none;
+  
 }
 
 #pet-card-inner > .pet-card {
@@ -129,10 +130,67 @@ ul {
   left: 0%;
 }
 
-.match-card {
+.matches-list-column > #my-matches > .match-card  {
   display: inline-block;
+  width: 75%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 1em;
 }
 
 .navbar {
   margin-bottom: 25px;
+}
+
+li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.profile-preferences {
+  margin-top: 15px
+}
+
+.profile-pets-list > .pet-card {
+  width: 45%;
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: text-top;
+  margin-bottom: 10px;
+}
+
+.matches-list-column {
+  height: 90vh;
+  overflow: scroll;
+}
+
+.profile-image > img {
+  width: 50%;
+}
+
+#home-matches > #my-matches > .match-card {
+  width: 25%;
+  margin-right: auto;
+  margin-left: auto;
+  display: inline-block;
+  margin-left: 2em;
+  vertical-align: top;
+}
+
+.match-card-card > .list-group-item {
+  padding:0%;
+  margin-bottom: .5em;
+}
+
+.pet-card {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.card-body {
+  padding: .25em
+}
+
+.list-group > .list-group-item {
+  padding: .25em
 }
