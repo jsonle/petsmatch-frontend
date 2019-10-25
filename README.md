@@ -1,68 +1,77 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# PetsMatch
+"If your pets don't match, you don't match!" We know how pet lovers put their pets first, even when they're looking for love. PetsMatch makes that easy, by making sure that you know about your potential love interests pets.
 
-## Available Scripts
+## Getting Started
+If you would like to run PetsMatch locally fork and clone the repo then run:
+```
+npm install
+```
+and
+```
+bundle install
+```
+in the front- and backend folders respectively.
 
-In the project directory, you can run:
+In the backend folder run:
+```
+rails s
+```
+to start the server. Then, in the frontend folder run:
+```
+node server
+```
+and
+```
+npm start
+```
 
-### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Installing
+Make sure rails is installed on your local server.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Run ```bundle install``` in your terminal
 
-### `yarn test`
+Run ```rails s``` in your terminal
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Right click on ```index.html``` and copy path into your browser.
 
-### `yarn build`
+You should now be up and running!
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Sign Up!
+Please enter a unique username and password. If the username is already in use, you'll need to choose another. If you already have an account, please click log-in instead.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Game Play!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 1) Login/Signup!
+![Lizzo_Sign_In](https://media.giphy.com/media/htXQ7wSFXNMJsYOSRn/giphy.gif)
 
-### `yarn eject`
+### 2) Check out the menu options -- you can look up Lizzo lyrics or change the theme of the app.
+![Lizzo_Menu_Options](https://media.giphy.com/media/j04WCzclHKATpQWjLr/giphy.gif)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 3) Choose your trivia game - speed or regular!
+![Lizzo_Trivia_Games](https://media.giphy.com/media/TJxvae338VzQPgLUr7/giphy.gif)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 4) Did you make the high score chart? Twerk skills on legendary!
+![Lizzo_High_Score_Tables](https://media.giphy.com/media/XeS8alxZXW4ZiFjC3f/giphy.gif)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Built With
+Vanilla js
+Rails
+PostgreSQL
+Bootstrap
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Created By:
+Andy Rosario
+```
+@andrewrosario
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Syd Bailey
+```
+@sydbails
+```
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Acknowledgments
+Genius API -- RapidAPI

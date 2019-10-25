@@ -28,10 +28,10 @@ const UserProfileDetails = (props) => {
             </div>
 
             <div className="profile-preferences">
-                <h3>Your Match Preferences</h3>
-                <p><strong>Age Range</strong><br></br> 
-                {props.currentUser.preference.min_age} to {props.currentUser.preference.max_age}</p>
-                <label><strong>Pet Preferences</strong></label>
+                <h4>Your Match Preferences</h4>
+                <strong>Age Range</strong><br></br> 
+                {props.currentUser.preference.min_age} to {props.currentUser.preference.max_age}<br></br>
+                <strong>Pet Preferences</strong>
                 <ul className="profile-pets-pref-list text-center">
                     {props.currentUser.preference.wants_dog ? <li className='mr-2'>Dog</li> : null}
                     {props.currentUser.preference.wants_cat ? <li className='mr-2'>Cat</li> : null}
@@ -41,7 +41,7 @@ const UserProfileDetails = (props) => {
                     {props.currentUser.preference.wants_exotic ? <li className='mr-2'>Exotic</li> : null}
                     {props.currentUser.preference.wants_rodent ? <li className='mr-2'>Rodent</li> : null}
                 </ul>
-                <label><strong>Gender Preferences</strong></label>
+                <strong>Gender Preferences</strong>
                 <ul className="profile-gender-pref-list">
                     {props.currentUser.preference.wants_men ? <li>Men</li> : null}
                     {props.currentUser.preference.wants_women ? <li>Women</li> : null}
