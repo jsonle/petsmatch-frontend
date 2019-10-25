@@ -15,9 +15,6 @@ import { BrowserRouter as Router,
   Redirect} from 'react-router-dom';
 import './App.scss';
 
-
-
-
 class App extends React.Component {
   state = {
     currentUser: null
@@ -49,7 +46,6 @@ class App extends React.Component {
     fetch('http://localhost:3000/login', configObj)
     .then(response => response.json())
     .then(response => {
-      console.log(response);
       localStorage.setItem("jwt", response.jwt);
       localStorage.setItem("userId", response.user.id);
       this.fetchCurrentUser(response.user.id)
@@ -162,7 +158,6 @@ class App extends React.Component {
     fetch(`http://localhost:3000/users/${currentId}`, configObj)
     .then(response => response.json())
     .then(response => {
-      console.log(response);
       this.fetchCurrentUser(currentId);
     })
   }
@@ -176,7 +171,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.currentUser);
     return (
       <Router>
         <div className="App">
