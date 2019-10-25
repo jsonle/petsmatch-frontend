@@ -7,22 +7,26 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container';
 
 const MatchedUserCard = (props) => {
-    console.log('matchedusercard props', props)
+    if(props.match.user_two) {
+        var matched_user = props.match.user_two
+    } else {
+        var matched_user = props.match.user_one
+    }
     return ( 
         <Card className='match-card'>
-            <Card.Img variant="top" src={props.match.user_two.image.url} />
+            <Card.Img variant="top" src={matched_user.image.url} />
             <Card.Body>
-                <Card.Title><h3>{props.match.user_two.name}</h3></Card.Title>
+                <Card.Title><h3>{matched_user.name}</h3></Card.Title>
                 <Card.Text>
-                    Age: {props.match.user_two.age}<br></br>
-                    {props.match.user_two.bio}
+                    Age: {matched_user.age}<br></br>
+                    {matched_user.bio}
                 </Card.Text>
             </Card.Body>
             <ListGroup className="list-group-flush">
                 <ListGroup.Item>
                     <Container className="pet-list-container">
                         <Row className="pet-list-row">
-                            {props.match.user_two.pets.map( (pet, index) => <PetCard pet={pet} key={index} />)}
+                            {matched_user.pets.map( (pet, index) => <PetCard pet={pet} key={index} />)}
                         </Row>
                     </Container>
                 </ListGroup.Item>

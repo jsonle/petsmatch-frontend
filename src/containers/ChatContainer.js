@@ -109,14 +109,13 @@ class ChatContainer extends Component {
         .then(resp => resp.json())
         .then(data => {
             socket.emit('leave', `chat_id_${this.state.currentMessage.chat_id}`)
-            console.log('fetch messages data', data)
             this.setState({
                 currentDisplayedChat: {
                     messages: data.messages
                 },
                 currentMessage: {
                     ...this.state.currentMessage,
-                    chat_id: chat_id
+                    chat_id: data.id
                 }
             });
         })
@@ -152,6 +151,12 @@ class ChatContainer extends Component {
         })
         .then(resp => resp.json())
         .then(data => {
+            this.setState({
+                currentMessage: {
+                    ...this.state.currentMessage,
+                    chat_id: data.id
+                }
+            })
             this.fetchChatMessages(data.id)
         });
     }
@@ -167,11 +172,10 @@ class ChatContainer extends Component {
                             } else {
                                 var otherUser = match.user_one
                             }
-                            return (
-                                <MDBListGroupItem key={match.id} onClick={ () => this.findOrCreateNewChatFromMatchClick(match.id)} hover>{otherUser.name}</MDBListGroupItem>
-                            )
-                        }
-                        )}
+                            if(!match.chat) {
+                                return <MDBListGroupItem key={match.id} onClick={ () => this.findOrCreateNewChatFromMatchClick(match.id)} hover>{otherUser.name}</MDBListGroupItem>
+                            }
+                        })}
                     </MDBListGroup>
                 </MDBContainer>
             </div>
@@ -183,23 +187,14 @@ class ChatContainer extends Component {
             showMatches: false
         })
     }
-
-    testChatUserTextAlign = (num) => {
-        this.setState({
-            currentMessage: {
-                ...this.state.currentMessage,
-                user_id: num
-            }
-        });
-    }
     
     render() { 
         const socket = socketIOClient(this.state.endpoint);
         return ( 
             <Row className='h-75 mt-3 ml-3 mr-3'>
-                <Col lg={4}>
-                    <div className='h-75 border border-dark pt-1 pl-1 pr-1'>
-                        {this.state.showMatches ? <div className='overflow-auto'>{this.renderMatches()}</div> : <div><h3>Your Open Chats</h3>{this.renderChatList()}</div>}
+                <Col sm={3} lg={4}>
+                    <div className='h-75 shadow p-3 mb-5 bg-white rounded'>
+                        {this.state.showMatches ? <div className='overflow-auto'><h3>Your Matches</h3>{this.renderMatches()}</div> : <div><h3>Your Open Chats</h3>{this.renderChatList()}</div>}
                     </div>
                     <div className='mt-1'>
                         {!this.state.showMatches ? <button onClick={() => this.fetchMatches()}>Start a New Chat</button> : <button onClick={() => this.handleGoBack()}>Go Back</button>}
