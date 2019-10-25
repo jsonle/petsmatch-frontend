@@ -20,7 +20,8 @@ import './App.scss';
 class App extends React.Component {
   state = {
     currentUser: null,
-    loggedInAlert: false
+    loggedInAlert: false,
+    signedUpAlert: false
   }
 
   componentDidMount() {
@@ -91,7 +92,10 @@ class App extends React.Component {
     .then(response => {
         localStorage.setItem("jwt", response.jwt);
         localStorage.setItem("userId", response.user.id);
-        this.fetchCurrentUser(response.user.id)
+        this.fetchCurrentUser(response.user.id);
+        this.setState({
+          signedUpAlert: true
+        })
     })
     .catch(err => {
       console.log('Error', err)
@@ -185,7 +189,8 @@ class App extends React.Component {
       <Router>
         <div className="App">
           <NavbarContainer onLoginSubmit={this.onLoginSubmit} currentUser={this.state.currentUser} handleLogout={this.handleLogout}/>
-          {/* <Alert variant="primary" show={this.state.loggedInAlert} onClose={() => this.setState({loggedInAlert: false})} dismissible>Successfully logged in!</Alert> */}
+          <Alert variant="primary" show={this.state.loggedInAlert} onClose={() => this.setState({loggedInAlert: false})} dismissible>Successfully logged in!</Alert>
+          <Alert variant="primary" show={this.state.signedUpAlert} onClose={() => this.setState({signedUpAlert: false})} dismissible>Successfully created a new account!</Alert>
           <Switch>
             <Route exact path="/">
               <HomeContainer currentUser={this.state.currentUser} />
