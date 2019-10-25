@@ -28,7 +28,7 @@ class BrowseContainer extends Component {
     renderUserCards = () => {
         return this.state.users.map( (user, index) => {
             return (
-                <div key={index} className='clearfix text-center'>
+                <div key={index} className='browse-card clearfix text-center'>
                         <img className="w-75 slider-image" src={user.image.url} alt="First slide" onClick={ (event) => this.handleClick(event, user.id)} />
                         <br></br>
                         <p className='browse-user-name float-left'>{user.name}</p>
@@ -46,7 +46,6 @@ class BrowseContainer extends Component {
         })
         .then(resp => resp.json())
         .then(data => {
-            console.log('data', data)
             var matched  = false
             data.received_matches.map( (match) => {
                 if(match.user_one.id === this.props.currentUser.id) {
@@ -127,7 +126,6 @@ class BrowseContainer extends Component {
         return (
             <div>
                 <div id='browse-slider'>
-                        <FilterMenu />
                     <div id='slider-inner'>
                         {this.renderUserCards()}
                     </div>

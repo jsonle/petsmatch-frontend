@@ -38,7 +38,27 @@ ul {
   padding-bottom: 5px;
   padding-right: 30px;
   padding-left: 30px;
+  animation-name: fade-in;
+	animation-fill-mode: both;
+	animation-duration: 1s;
+}
 
+.browse-card {
+  animation-name: fade-in;
+	animation-fill-mode: both;
+	animation-duration: 1s;
+}
+
+$animationDelay: 1;
+@for $i from 1 through 15 {
+	.browse-card:nth-of-type(#{$i}) {
+		animation-delay: #{0.3+($i)/30}s;
+  }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 #chat-window {
@@ -49,10 +69,8 @@ ul {
   flex-direction: column-reverse;
 }
 
-.carousel-fade {
-  width: 50%;
-  margin-right: auto;
-  margin-left: auto;
+#incoming-messages {
+  overflow: scroll
 }
 
 #browse-slider {
@@ -76,7 +94,6 @@ ul {
 .match-card > .list-group-flush > .list-group-item > .pet-list-container > .pet-list-row > .pet-card {
   display: inline-block;
   width: 45%;
-  // margin-left: 5%;
   box-shadow: none;
   
 }
@@ -193,4 +210,9 @@ li {
 
 .list-group > .list-group-item {
   padding: .25em
+}
+
+.user-profile-column {
+  border-right: 3px solid lightgrey
+  
 }
