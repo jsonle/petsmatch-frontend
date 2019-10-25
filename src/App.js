@@ -9,6 +9,7 @@ import ChatContainer from './containers/ChatContainer';
 import AddPetsContainer from './containers/AddPetsContainer';
 import PreferencesContainer from './containers/PreferencesContainer';
 import EditProfileContainer from './containers/EditProfileContainer';
+import Alert from 'react-bootstrap/Alert'
 import { BrowserRouter as Router,
   Switch,
   Route,
@@ -16,11 +17,10 @@ import { BrowserRouter as Router,
 import './App.scss';
 
 
-
-
 class App extends React.Component {
   state = {
-    currentUser: null
+    currentUser: null,
+    loggedInAlert: false
   }
 
   componentDidMount() {
@@ -52,7 +52,10 @@ class App extends React.Component {
       console.log(response);
       localStorage.setItem("jwt", response.jwt);
       localStorage.setItem("userId", response.user.id);
-      this.fetchCurrentUser(response.user.id)
+      this.fetchCurrentUser(response.user.id);
+      this.setState({
+        loggedInAlert: true
+      })
     })
   }
 
@@ -178,9 +181,11 @@ class App extends React.Component {
   render() {
     console.log(this.state.currentUser);
     return (
+      
       <Router>
         <div className="App">
           <NavbarContainer onLoginSubmit={this.onLoginSubmit} currentUser={this.state.currentUser} handleLogout={this.handleLogout}/>
+          <Alert variant="primary" show={this.state.loggedInAlert} onClose={() => this.setState({loggedInAlert: false})} dismissible>Successfully logged in!</Alert>
           <Switch>
             <Route exact path="/">
               <HomeContainer currentUser={this.state.currentUser} />
@@ -197,7 +202,7 @@ class App extends React.Component {
 
             {this.state.currentUser ? <Route exact path="/chat"><ChatContainer currentUser={this.state.currentUser} /></Route> : <Redirect from='/chat' to='/'/>}
 
-            {this.state.currentUser ? <Route exact path="/browse"><BrowseContainer currentUser={this.state.currentUser} fetchCurrentUser={this.fetchCurrentUser}/></Route> : <Redirect from='/browse/' exact to='/'/>}
+            {this.state.currentUser ? <Route exact path="/browse"><BrowseContainer currentUser={this.state.currentUser}/></Route> : <Redirect from='/browse/' exact to='/'/>}
           </Switch>
         </div>
       </Router>
