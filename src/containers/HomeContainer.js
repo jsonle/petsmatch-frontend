@@ -36,7 +36,7 @@ class HomeContainer extends Component {
     }
 
     renderMatchCards = () => {
-        if(this.state.myMatches) {
+        if(this.state.currentUser) {
             return <MatchList matches={this.state.myMatches} />
         }
     }

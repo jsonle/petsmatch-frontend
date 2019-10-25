@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AddPetForm from '../components/AddPetForm';
+import Alert from 'react-bootstrap/Alert'
 
 class AddPetsContainer extends Component {
     constructor(props) {
@@ -9,7 +10,8 @@ class AddPetsContainer extends Component {
             age: "",
             pet_type: "",
             category: "dog",
-            image: null
+            image: null,
+            savePetAlert: false
         }
     }
 
@@ -28,13 +30,6 @@ class AddPetsContainer extends Component {
 
     handleAddPetSubmit = event => {
         event.preventDefault();
-        const formData = new FormData();
-        formData.append('name', this.state.name)
-        formData.append('age', this.state.age)
-        formData.append('pet_type', this.state.pet_type)
-        formData.append('category', this.state.category)
-        formData.append('image', this.state.image)
-        this.props.onAddPetSubmit(formData);
         this.props.history.push('/');
     }
 
@@ -53,26 +48,20 @@ class AddPetsContainer extends Component {
             age: "",
             pet_type: "",
             category: "dog",
-            image: null
+            image: null,
+            savePetAlert: true
         })
     }
 
     handleEditPreferencesClick = event => {
         event.preventDefault();
-        const formData = new FormData();
-        formData.append('name', this.state.name)
-        formData.append('age', this.state.age)
-        formData.append('pet_type', this.state.pet_type)
-        formData.append('category', this.state.category)
-        formData.append('image', this.state.image)
-        this.props.onAddPetSubmit(formData);
         this.props.history.push('/preferences');
     }
 
     render() { 
-        console.log(this.state.pet_type)
         return (
             <div className="add-pets-container">
+                <Alert variant="primary" show={this.state.savePetAlert} onClose={() => this.setState({savePetAlert: false})} dismissible>Successfully added pet to your profile! You can add another pet by filling out the form again.</Alert>
                 <AddPetForm 
                     handleFileChange={this.handleFileChange}
                     handlePetFormChange={this.handlePetFormChange}
