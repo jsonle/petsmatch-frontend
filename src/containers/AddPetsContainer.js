@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AddPetForm from '../components/AddPetForm';
+import Alert from 'react-bootstrap/Alert'
 
 class AddPetsContainer extends Component {
     constructor(props) {
@@ -9,7 +10,8 @@ class AddPetsContainer extends Component {
             age: "",
             pet_type: "",
             category: "dog",
-            image: null
+            image: null,
+            savePetAlert: false
         }
     }
 
@@ -53,7 +55,8 @@ class AddPetsContainer extends Component {
             age: "",
             pet_type: "",
             category: "dog",
-            image: null
+            image: null,
+            savePetAlert: true
         })
     }
 
@@ -70,9 +73,9 @@ class AddPetsContainer extends Component {
     }
 
     render() { 
-        console.log(this.state.pet_type)
         return (
             <div className="add-pets-container">
+                <Alert variant="primary" show={this.state.savePetAlert} onClose={() => this.setState({savePetAlert: false})} dismissible>Successfully added pet to your profile!</Alert>
                 <AddPetForm 
                     handleFileChange={this.handleFileChange}
                     handlePetFormChange={this.handlePetFormChange}
