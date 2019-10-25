@@ -16,15 +16,13 @@ class MatchList extends Component {
             </div>
             )
         } else {
-            return this.props.matches.map( (match, index) => {
-                return (
-                    <>
-                    <h1>Welcome Back to PetsMatch!</h1>
-                    <h3>Here are your Matches...</h3>
-                    <MatchedUserCard match={match} key={index}/> 
-                    </>
-                )
-            })
+            return (
+                <>
+                <h1>Welcome Back to PetsMatch!</h1>
+                <h3>Here are your Matches...</h3>
+                {this.props.matches.map( (match, index) => { return <><MatchedUserCard match={match} key={index}/></>})}
+                </>
+            )
         }
     }
 
