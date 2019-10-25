@@ -166,7 +166,7 @@ class App extends React.Component {
     }
     fetch(`http://localhost:3000/users/${currentId}`, configObj)
     .then(response => response.json())
-    .then(response => {
+    .then( () => {
       this.fetchCurrentUser(currentId);
     })
   }

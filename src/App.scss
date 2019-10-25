@@ -186,7 +186,10 @@ li {
 }
 
 #home-matches > #my-matches > .match-card {
-  width: 25%;
+  @media only screen and (min-width: 1000px){
+    width: 25%;
+  };
+  width: 45%;
   margin-right: auto;
   margin-left: auto;
   display: inline-block;
@@ -215,4 +218,8 @@ li {
 .user-profile-column {
   border-right: 3px solid lightgrey
   
+}
+
+.profile-pets-pref-list {
+  margin-bottom: .25em;
 }

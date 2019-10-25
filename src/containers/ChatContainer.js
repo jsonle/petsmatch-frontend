@@ -158,7 +158,28 @@ class ChatContainer extends Component {
                 }
             })
             this.fetchChatMessages(data.id)
-        });
+            console.log(data.id)
+            this.handleGoBack()
+            fetch('http://localhost:3000/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+                },
+                body: JSON.stringify({user_id: this.props.currentUser.id, chat_id: data.id, text: "Welcome to Chat!"})
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                console.log(data)
+                socket.emit("sendMessage", data);
+                this.setState({
+                    currentMessage: {
+                        ...this.state.currentMessage,
+                        text: ''
+                    } 
+                })
+            });
+        })
     }
 
     renderMatches = () => {
@@ -183,6 +204,17 @@ class ChatContainer extends Component {
     }
 
     handleGoBack = () => {
+        fetch(`http://localhost:3000/chats/${this.state.currentMessage.user_id}`, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt")
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            this.setState({
+                chatList: data
+            })
+        })
         this.setState({
             showMatches: false
         })
@@ -193,8 +225,8 @@ class ChatContainer extends Component {
         return ( 
             <Row className='h-75 mt-3 ml-3 mr-3'>
                 <Col sm={3} lg={4}>
-                    <div className='h-75 shadow p-3 mb-5 bg-white rounded'>
-                        {this.state.showMatches ? <div className='overflow-auto'><h3>Your Matches</h3>{this.renderMatches()}</div> : <div><h3>Your Open Chats</h3>{this.renderChatList()}</div>}
+                    <div className='h-75 shadow p-3 mb-5 bg-white rounded overflow-auto'>
+                        {this.state.showMatches ? <div className=''><h3>Your Matches</h3>{this.renderMatches()}</div> : <div><h3>Your Open Chats</h3>{this.renderChatList()}</div>}
                     </div>
                     <div className='mt-1'>
                         {!this.state.showMatches ? <button onClick={() => this.fetchMatches()}>Start a New Chat</button> : <button onClick={() => this.handleGoBack()}>Go Back</button>}
@@ -202,7 +234,7 @@ class ChatContainer extends Component {
                 </Col>
                 <Col id='chat-window'>
                     <div id='messages-window' className='h-100'>
-                        <MessagesContainer currentDisplayedChat={this.state.currentDisplayedChat.messages} currentUser={this.state.currentMessage.user_id} />
+                        <MessagesContainer currentDisplayedChat={this.state.currentDisplayedChat.messages} currentUser={this.state.currentMessage.user_id} currentMessage={this.state.currentMessage} />
                         <form className='mt-1' onSubmit={(e) => {this.sendChatMessage(socket, e)}}>
                             <input 
                                 className='w-75' 

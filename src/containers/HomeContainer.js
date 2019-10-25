@@ -5,36 +5,7 @@ import UserStats from '../components/UserStats'
 class HomeContainer extends Component {
     state = {  }
 
-    componentDidMount() {
-        if(!!this.props.currentUser && !this.state.currentUser) {
-            this.fetchCurrentUser()
-        }
-    }
-
-    componentDidUpdate() {
-        if(!!this.props.currentUser && !this.state.currentUser) {
-            this.fetchCurrentUser()
-        }
-    }
-
-    fetchCurrentUser = () => {
-        fetch(`http://localhost:3000/profile/${this.props.currentUser.id}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem("jwt")
-            },
-        })
-        .then(resp => resp.json())
-        .then(data => {
-            this.setState({
-                currentUser: data,
-                myMatches: [...data.started_matches, ...data.received_matches]
-            })
-        })
-    }
-
     renderBigLogoAndName = () => {
-        console.log(this.props.currentUser)
         if(!this.props.currentUser) {
             return (
                 <div>
@@ -45,8 +16,9 @@ class HomeContainer extends Component {
     }
 
     renderMatchCards = () => {
-        if(this.state.currentUser) {
-            return <MatchList matches={this.state.myMatches} />
+        if(this.props.currentUser) {
+            const myMatches = [...this.props.currentUser.started_matches, ...this.props.currentUser.received_matches]
+            return <MatchList matches={myMatches} />
         }
     }
 
