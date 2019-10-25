@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import UserStats from '../components/UserStats'
 import FilterMenu from '../components/FilterMenu'
+import Alert from 'react-bootstrap/Alert'
 
 
 class BrowseContainer extends Component {
     state = { 
         users: [],
         displayedUser: undefined,
-        isMatchedWithDisplayed: false
+        isMatchedWithDisplayed: false,
+        matchAlert: false,
+        unmatchAlert: false
      }
 
     componentDidMount() {
@@ -81,7 +84,8 @@ class BrowseContainer extends Component {
         .then(data => {
             this.props.fetchCurrentUser(this.props.currentUser.id);
             this.setState({
-                isMatchedWithDisplayed: true
+                isMatchedWithDisplayed: true,
+                matchAlert: true
             })
         })
     }
@@ -102,7 +106,8 @@ class BrowseContainer extends Component {
         .then(data => {
             this.props.fetchCurrentUser(this.props.currentUser.id);
             this.setState({
-                isMatchedWithDisplayed: false
+                isMatchedWithDisplayed: false,
+                unmatchAlert: true
             })
         })
     }
@@ -126,6 +131,8 @@ class BrowseContainer extends Component {
     render() { 
         return (
             <div>
+                {this.state.displayedUser && <Alert variant="primary" show={this.state.matchAlert} onClose={() => this.setState({matchAlert: false})} dismissible>You matched with {this.state.displayedUser.name}!</Alert>}
+                {this.state.displayedUser && <Alert variant="danger" show={this.state.unmatchAlert} onClose={() => this.setState({unmatchAlert: false})} dismissible>You are no longer matched with {this.state.displayedUser.name}.</Alert>}
                 <div id='browse-slider'>
                         <FilterMenu />
                     <div id='slider-inner'>

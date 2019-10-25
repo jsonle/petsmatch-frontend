@@ -185,7 +185,7 @@ class App extends React.Component {
       <Router>
         <div className="App">
           <NavbarContainer onLoginSubmit={this.onLoginSubmit} currentUser={this.state.currentUser} handleLogout={this.handleLogout}/>
-          <Alert variant="primary" show={this.state.loggedInAlert} onClose={() => this.setState({loggedInAlert: false})} dismissible>Successfully logged in!</Alert>
+          {/* <Alert variant="primary" show={this.state.loggedInAlert} onClose={() => this.setState({loggedInAlert: false})} dismissible>Successfully logged in!</Alert> */}
           <Switch>
             <Route exact path="/">
               <HomeContainer currentUser={this.state.currentUser} />
@@ -202,7 +202,7 @@ class App extends React.Component {
 
             {this.state.currentUser ? <Route exact path="/chat"><ChatContainer currentUser={this.state.currentUser} /></Route> : <Redirect from='/chat' to='/'/>}
 
-            {this.state.currentUser ? <Route exact path="/browse"><BrowseContainer currentUser={this.state.currentUser}/></Route> : <Redirect from='/browse/' exact to='/'/>}
+            {this.state.currentUser ? <Route exact path="/browse"><BrowseContainer fetchCurrentUser={this.fetchCurrentUser} currentUser={this.state.currentUser}/></Route> : <Redirect from='/browse/' exact to='/'/>}
           </Switch>
         </div>
       </Router>
