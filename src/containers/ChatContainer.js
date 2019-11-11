@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import socketIOClient from "socket.io-client";
 import ChatList from '../components/ChatList'
-import { nullLiteral } from '@babel/types';
-import { resolveNaptr } from 'dns';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { MDBListGroup, MDBListGroupItem, MDBContainer, MDBBadge } from "mdbreact";

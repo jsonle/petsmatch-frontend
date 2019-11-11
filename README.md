@@ -37,10 +37,10 @@ Right click on ```index.html``` and copy path into your browser.
 
 You should now be up and running!
 
-## Sign Up!
-Please enter a unique username and password. If the username is already in use, you'll need to choose another. If you already have an account, please click log-in instead.
+## Sign Up
+Please enter a unique email and password. If the username is already in use, you'll need to choose another. If you already have an account, please click log-in instead.
 
-## Game Play!
+## Using PetsMatch!
 
 ### 1) Login/Signup!
 ![Lizzo_Sign_In](https://media.giphy.com/media/htXQ7wSFXNMJsYOSRn/giphy.gif)
@@ -68,9 +68,9 @@ Andy Rosario
 @andrewrosario
 ```
 
-Syd Bailey
+Jason Le
 ```
-@sydbails
+@jsonle
 ```
 
 ## Acknowledgments

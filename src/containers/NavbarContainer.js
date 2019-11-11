@@ -7,7 +7,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 class NavbarContainer extends Component {
     state = { 
         email: "",
-        password: "",
+        password: ""
      }
 
     handleChange = event => {

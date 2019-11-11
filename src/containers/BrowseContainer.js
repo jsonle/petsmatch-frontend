@@ -32,9 +32,9 @@ class BrowseContainer extends Component {
         return this.state.users.map( (user, index) => {
             return (
                 <div key={index} className='browse-card clearfix text-center'>
-                        <img className="w-75 slider-image" src={user.image.url} alt="First slide" onClick={ (event) => this.handleClick(event, user.id)} />
-                        <br></br>
-                        <p className='browse-user-name float-left'>{user.name}</p>
+                    <img className="w-75 slider-image" src={user.image.url} alt="First slide" onClick={ (event) => this.handleClick(event, user.id)} />
+                    <br></br>
+                    <p className='browse-user-name float-left'>{user.name}</p>
                 </div>
             )
         })
