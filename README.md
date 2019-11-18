@@ -1,6 +1,8 @@
 # PetsMatch
 "If your pets don't match, you don't match!" We know how pet lovers put their pets first, even when they're looking for love. PetsMatch makes that easy, by making sure that you know about your potential love interests pets.
 
+Check out the backend code [here] (https://github.com/andrewrosario/petsmatch-backend).
+
 ## Getting Started
 PetsMatch has been deployed to Heroku. You can demo the app [here](https://petsmatch-frontend.herokuapp.com/).
 
