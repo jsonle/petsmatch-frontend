@@ -2,7 +2,7 @@
 "If your pets don't match, you don't match!" We know how pet lovers put their pets first, even when they're looking for love. PetsMatch makes that easy, by making sure that you know about your potential love interests pets.
 
 ## Getting Started
-PetsMatch has been deployed to Heroku. You can demo the app [here](https://petsmatch-frontend.herokuapp.com/)
+PetsMatch has been deployed to Heroku. You can demo the app [here](https://petsmatch-frontend.herokuapp.com/).
 
 ## Sign Up
 To sign up, click on the sign up button on the top right. If you already have an account, you can log-in instead.
@@ -17,7 +17,7 @@ After clicking the 'sign up' button on the top right, you will be taken to the s
 After creating a new account, you will be taken a pet sign up page. This is where you can add your pets to your profile.
 Once you have filled out the form, click the 'add pet' button on the left to save your pet to your profile. You can continue adding pets, or you can go directly to edit your preferences.
 
-![PetsMatch_Add_Pet](https://media.giphy.com/media/UWnEtVBnXBTDcVe6wT/source.gif)
+![PetsMatch_Add_Pet](https://media.giphy.com/media/TiIdAH1et2ZWTbsOjX/source.gif)
 
 Once on the preferences screen, you can edit this form to filter your searches to whatever you desire!
 
