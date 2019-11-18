@@ -25,7 +25,7 @@ Once on the preferences screen, you can edit this form to filter your searches t
 
 ### 2) Your Profile
 
-![PetsMatch_Profile](https://media.giphy.com/media/hreE1ZT13XAUVJUyUt/source.gif)
+![PetsMatch_Profile](https://media.giphy.com/media/kg6oTKL517WCqF7TuW/source.gif)
 
 Your profile page displays your information, your pets, and your matches. From here you can edit your profile and your preferences.
 If you don't have any matches, there will be a browse button on the right. 
