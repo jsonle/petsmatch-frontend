@@ -1,5 +1,4 @@
 import React from 'react';
-import PetsList from './PetsList';
 import PetCard from './PetCard';
 
 const UserStats = (props) => {

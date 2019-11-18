@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SignUpForm from '../components/SignUpForm';
-import { forStatement } from '@babel/types';
 
 class SignUpContainer extends Component {
     state = { 
