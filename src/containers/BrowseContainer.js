@@ -13,7 +13,7 @@ class BrowseContainer extends Component {
      }
 
     componentDidMount() {
-        fetch(`https://petsmatch-backend.herokuapp.com/${this.props.currentUser.id}`, {
+        fetch(`https://petsmatch-backend.herokuapp.com/users/${this.props.currentUser.id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem("jwt")
@@ -40,7 +40,7 @@ class BrowseContainer extends Component {
     }
 
     handleClick = (event, id) => {
-        fetch(`https://petsmatch-backend.herokuapp.com/${id}`, {
+        fetch(`https://petsmatch-backend.herokuapp.com/profile/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem("jwt")

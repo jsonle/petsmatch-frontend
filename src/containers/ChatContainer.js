@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import { MDBListGroup, MDBListGroupItem, MDBContainer, MDBBadge } from "mdbreact";
 import MessagesContainer from './MessagesContainer';
 var axios = require('axios');
-const endpoint = "http://127.0.0.1:8000"
+const endpoint = "https://petsmatch-frontend.herokuapp.com/"
 const socket = socketIOClient(endpoint);
 
 
@@ -18,7 +18,7 @@ class ChatContainer extends Component {
             myMatches: [],
             chatList: [],
             response: false,
-            endpoint: "http://127.0.0.1:8000",
+            endpoint: "https://petsmatch-frontend.herokuapp.com/",
             currentDisplayedChat: {
                 messages: []
             },
@@ -31,7 +31,7 @@ class ChatContainer extends Component {
     }
 
     componentDidMount() {
-        fetch(`https://petsmatch-backend.herokuapp.com/${this.state.currentMessage.user_id}`, {
+        fetch(`https://petsmatch-backend.herokuapp.com/chats/${this.state.currentMessage.user_id}`, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("jwt")
             }

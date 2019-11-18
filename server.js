@@ -8,9 +8,13 @@ router.get('/', function(req, res){
   res.send({response: "Hello"}).status(200);
 });
 
-let server = http.createServer(app);
-var io = require('socket.io')(server);
 const port = process.env.PORT || 8000;
+const server = express()
+  .use(express.static(__dirname + '/build'), (req, res, next) => next())
+  .get('*', function(req, res) {res.sendFile('index.html', {root: __dirname + '/build'})})
+  .listen(port, () => console.log(`Listening on ${ port }`));
+
+var io = require('socket.io')(server);
 
 io.on('connection', function(socket){
     socket.on('leave',function(room){  
@@ -30,10 +34,6 @@ io.on('connection', function(socket){
       io.sockets.in(`chat_id_${message.chat_id}`).emit('receiveMessage', chatMessage(message.user_id, message.text, message.chat_id));
       });
     socket.on('disconnect', function(){});
-});
-
-server.listen(port, function(){
-  console.log('listening on', port);
 });
 
 const chatMessage = (user_id, text, chat_id) => {
