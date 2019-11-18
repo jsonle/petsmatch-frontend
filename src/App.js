@@ -1,5 +1,4 @@
 import React from 'react';
-import { thisExpression } from '@babel/types';
 import NavbarContainer from './containers/NavbarContainer';
 import HomeContainer from './containers/HomeContainer';
 import BrowseContainer from './containers/BrowseContainer';
@@ -46,7 +45,7 @@ class App extends React.Component {
       })
     }
 
-    fetch('http://localhost:3000/login', configObj)
+    fetch('https://petsmatch-backend.herokuapp.com/login', configObj)
     .then(response => response.json())
     .then(response => {
       localStorage.setItem("jwt", response.jwt);
@@ -66,7 +65,7 @@ class App extends React.Component {
       }
     }
 
-    fetch(`http://localhost:3000/profile/${userId}`, configObj)
+    fetch(`https://petsmatch-backend.herokuapp.com/profile/${userId}`, configObj)
     .then(response => response.json())
     .then(response => {
       this.setState({
@@ -81,7 +80,7 @@ class App extends React.Component {
         body: signUpData
     }
 
-    fetch('http://localhost:3000/users', configObj)
+    fetch('https://petsmatch-backend.herokuapp.com/users', configObj)
     .then(response => response.json())
     .then(response => {
       this.createNewPreference(response.user.id)
@@ -112,7 +111,7 @@ class App extends React.Component {
       })
     }
 
-    fetch('http://localhost:3000/preferences', configObj)
+    fetch('https://petsmatch-backend.herokuapp.com/preferences', configObj)
     .then(response => response.json())
     .then(response => console.log("New preference successfully created", response))
   }
@@ -127,7 +126,7 @@ class App extends React.Component {
       body: newPetData
     }
 
-    fetch('http://localhost:3000/pets', configObj)
+    fetch('https://petsmatch-backend.herokuapp.com/pets', configObj)
     .then(response => response.json())
     .then(response => {
       this.fetchCurrentUser(response.user.id)
@@ -147,7 +146,7 @@ class App extends React.Component {
       })
     }
 
-    fetch(`http://localhost:3000/preferences/${this.state.currentUser.preference.id}`, configObj)
+    fetch(`https://petsmatch-backend.herokuapp.com/${this.state.currentUser.preference.id}`, configObj)
     .then(response => response.json())
     .then(response => {
       this.fetchCurrentUser(response.user.id)
@@ -164,7 +163,7 @@ class App extends React.Component {
       },
       body: formData
     }
-    fetch(`http://localhost:3000/users/${currentId}`, configObj)
+    fetch(`https://petsmatch-backend.herokuapp.com/${currentId}`, configObj)
     .then(response => response.json())
     .then( () => {
       this.fetchCurrentUser(currentId);
