@@ -146,7 +146,7 @@ class App extends React.Component {
       })
     }
 
-    fetch(`https://petsmatch-backend.herokuapp.com/${this.state.currentUser.preference.id}`, configObj)
+    fetch(`https://petsmatch-backend.herokuapp.com/preferences/${this.state.currentUser.preference.id}`, configObj)
     .then(response => response.json())
     .then(response => {
       this.fetchCurrentUser(response.user.id)
@@ -163,7 +163,7 @@ class App extends React.Component {
       },
       body: formData
     }
-    fetch(`https://petsmatch-backend.herokuapp.com/${currentId}`, configObj)
+    fetch(`https://petsmatch-backend.herokuapp.com/users/${currentId}`, configObj)
     .then(response => response.json())
     .then( () => {
       this.fetchCurrentUser(currentId);

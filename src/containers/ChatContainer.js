@@ -31,7 +31,7 @@ class ChatContainer extends Component {
     }
 
     componentDidMount() {
-        fetch(`https://petsmatch-backend.herokuapp.com/${this.state.currentMessage.user_id}`, {
+        fetch(`https://petsmatch-backend.herokuapp.com/chats/${this.state.currentMessage.user_id}`, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("jwt")
             }
