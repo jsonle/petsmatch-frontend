@@ -2,48 +2,20 @@
 "If your pets don't match, you don't match!" We know how pet lovers put their pets first, even when they're looking for love. PetsMatch makes that easy, by making sure that you know about your potential love interests pets.
 
 ## Getting Started
-If you would like to run PetsMatch locally fork and clone the repo then run:
-```
-npm install
-```
-and
-```
-bundle install
-```
-in the front- and backend folders respectively.
-
-In the backend folder run:
-```
-rails s
-```
-to start the server. Then, in the frontend folder run:
-```
-node server
-```
-and
-```
-npm start
-```
-
-
-## Installing
-Make sure rails is installed on your local server.
-
-Run ```bundle install``` in your terminal
-
-Run ```rails s``` in your terminal
-
-Right click on ```index.html``` and copy path into your browser.
-
-You should now be up and running!
+PetsMatch has been deployed to Heroku. You can demo the app [here](https://petsmatch-frontend.herokuapp.com/)
 
 ## Sign Up
-Please enter a unique email and password. If the username is already in use, you'll need to choose another. If you already have an account, please click log-in instead.
+To sign up, click on the sign up button on the top right. If you already have an account, you can log-in instead.
 
 ## Using PetsMatch!
 
-### 1) Login/Signup!
-![Lizzo_Sign_In](https://media.giphy.com/media/htXQ7wSFXNMJsYOSRn/giphy.gif)
+### 1) Signup!
+After clicking the 'sign up' button on the top right, you will be taken to the sign up form page. 
+![PetsMatch_SignUp](http://www.giphy.com/gifs/kckneIVe8XKAThc4Mp)
+After creating a new account, you will be taken a pet sign up page. This is where you can add your pets to your profile.
+Once you have filled out the form, click the 'add pet' button on the left to save your pet to your profile. You can continue adding pets, or you can go directly to edit your preferences.
+![PetsMatch_Add_Pet](http://www.giphy.com/gifs/ii2VcfHQghHeyzxsD7)
+Once on the preferences screen, you can edit this form to filter your searches to whatever you desire!
 
 ### 2) Check out the menu options -- you can look up Lizzo lyrics or change the theme of the app.
 ![Lizzo_Menu_Options](https://media.giphy.com/media/j04WCzclHKATpQWjLr/giphy.gif)
