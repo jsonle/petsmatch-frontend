@@ -9,30 +9,46 @@ To sign up, click on the sign up button on the top right. If you already have an
 
 ## Using PetsMatch!
 
-### 1) Signup!
+### 1) Signup
 After clicking the 'sign up' button on the top right, you will be taken to the sign up form page. 
+
 ![PetsMatch_SignUp](https://media.giphy.com/media/YRKXg2T5Iv1iXKj3Cg/source.gif)
+
 After creating a new account, you will be taken a pet sign up page. This is where you can add your pets to your profile.
 Once you have filled out the form, click the 'add pet' button on the left to save your pet to your profile. You can continue adding pets, or you can go directly to edit your preferences.
+
 ![PetsMatch_Add_Pet](https://media.giphy.com/media/UWnEtVBnXBTDcVe6wT/source.gif)
+
 Once on the preferences screen, you can edit this form to filter your searches to whatever you desire!
+
 ![PetsMatch_Pref](https://media.giphy.com/media/MF0kz3mRAkKVfC8pyK/source.gif)
 
-### 2) Check out the menu options -- you can look up Lizzo lyrics or change the theme of the app.
-![Lizzo_Menu_Options](https://media.giphy.com/media/j04WCzclHKATpQWjLr/giphy.gif)
+### 2) Your Profile
 
-### 3) Choose your trivia game - speed or regular!
-![Lizzo_Trivia_Games](https://media.giphy.com/media/TJxvae338VzQPgLUr7/giphy.gif)
+![PetsMatch_Profile](https://media.giphy.com/media/hreE1ZT13XAUVJUyUt/source.gif)
 
-### 4) Did you make the high score chart? Twerk skills on legendary!
-![Lizzo_High_Score_Tables](https://media.giphy.com/media/XeS8alxZXW4ZiFjC3f/giphy.gif)
+Your profile page displays your information, your pets, and your matches. From here you can edit your profile and your preferences.
+If you don't have any matches, there will be a browse button on the right. 
+
+### 3) Browsing and Matching
+
+Potential matches that appear on your browse page will be filtered by your preference settings. Scroll through and click on a user on the left side of the screen to open up their information. If you are interested, you can click the match at the top right to match with that person!
+
+![PetsMatch_Browse](https://media.giphy.com/media/U7ha6eRIYTAocCUWKC/source.gif)
+
+### 4) Chat with your matches
+
+From the dropdown menu you can go to the chats page. Here you can start chats with anyone you matched with. Once you open a chat you can start messaging them!
+
+![PetsMatch_Chat](https://media.giphy.com/media/f5qRcUrNwvFkJsPAis/source.gif)
 
 
 ## Built With
-Vanilla js
+React
 Rails
 PostgreSQL
 Bootstrap
+Socket.io
 
 
 ## Created By:
@@ -47,4 +63,3 @@ Jason Le
 ```
 
 ## Acknowledgments
-Genius API -- RapidAPI
