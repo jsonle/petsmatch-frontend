@@ -11,11 +11,12 @@ To sign up, click on the sign up button on the top right. If you already have an
 
 ### 1) Signup!
 After clicking the 'sign up' button on the top right, you will be taken to the sign up form page. 
-![PetsMatch_SignUp](http://www.giphy.com/gifs/kckneIVe8XKAThc4Mp)
+![PetsMatch_SignUp](https://media.giphy.com/media/YRKXg2T5Iv1iXKj3Cg/source.gif)
 After creating a new account, you will be taken a pet sign up page. This is where you can add your pets to your profile.
 Once you have filled out the form, click the 'add pet' button on the left to save your pet to your profile. You can continue adding pets, or you can go directly to edit your preferences.
-![PetsMatch_Add_Pet](http://www.giphy.com/gifs/ii2VcfHQghHeyzxsD7)
+![PetsMatch_Add_Pet](https://media.giphy.com/media/UWnEtVBnXBTDcVe6wT/source.gif)
 Once on the preferences screen, you can edit this form to filter your searches to whatever you desire!
+![PetsMatch_Pref](https://media.giphy.com/media/MF0kz3mRAkKVfC8pyK/source.gif)
 
 ### 2) Check out the menu options -- you can look up Lizzo lyrics or change the theme of the app.
 ![Lizzo_Menu_Options](https://media.giphy.com/media/j04WCzclHKATpQWjLr/giphy.gif)
