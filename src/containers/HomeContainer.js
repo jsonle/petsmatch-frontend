@@ -9,6 +9,7 @@ class HomeContainer extends Component {
         if(!this.props.currentUser) {
             return (
                 <div>
+                    <Alert variant="primary">If you wish to try out the app without creating an account, use email: 'lizzo@lizzo.com' and password: 'lizzo' to log in.</Alert>
                     <img className='w-50 mt-5' id='logo' src={process.env.PUBLIC_URL + '/combined-logo.png'}></img>
                 </div>
             )
@@ -25,7 +26,6 @@ class HomeContainer extends Component {
     render() { 
         return ( 
             <div className='container'>
-                {this.props.currentUser && <Alert variant="primary">If you wish to try out the app without creating an account, use email: 'lizzo@lizzo.com' and password: 'lizzo' to log in.</Alert>}
                 {this.renderBigLogoAndName()}
                 <div  id='home-matches' className='row'>
                     {this.renderMatchCards()}
