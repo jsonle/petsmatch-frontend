@@ -7,7 +7,7 @@ Check out the backend code [here](https://github.com/andrewrosario/petsmatch-bac
 PetsMatch has been deployed to Heroku. You can demo the app [here](https://petsmatch-frontend.herokuapp.com/).
 
 ## Sign Up
-To sign up, click on the sign up button on the top right. If you already have an account, you can log-in instead.
+To sign up, click on the sign up button on the top right. If you already have an account, you can log-in instead. If you wish to test the app without creating a new account, you can use a test account with the login 'lizzo@lizzo.com' and password 'lizzo'.
 
 ## Using PetsMatch!
 

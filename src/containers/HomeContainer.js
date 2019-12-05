@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import MatchList from '../components/MatchList'
+import MatchList from '../components/MatchList';
+import Alert from 'react-bootstrap/Alert'
 
 class HomeContainer extends Component {
     state = {  }
@@ -8,6 +9,7 @@ class HomeContainer extends Component {
         if(!this.props.currentUser) {
             return (
                 <div>
+                    <Alert variant="primary">If you wish to try out the app without creating an account, use email: 'lizzo@lizzo.com' and password: 'lizzo' to log in.</Alert>
                     <img className='w-50 mt-5' id='logo' src={process.env.PUBLIC_URL + '/combined-logo.png'}></img>
                 </div>
             )
