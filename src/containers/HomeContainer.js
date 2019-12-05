@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import MatchList from '../components/MatchList'
+import MatchList from '../components/MatchList';
+import Alert from 'react-bootstrap/Alert'
 
 class HomeContainer extends Component {
     state = {  }
@@ -24,6 +25,7 @@ class HomeContainer extends Component {
     render() { 
         return ( 
             <div className='container'>
+                {this.props.currentUser && <Alert variant="primary">If you wish to try out the app without creating an account, use email: 'lizzo@lizzo.com' and password: 'lizzo' to log in.</Alert>}
                 {this.renderBigLogoAndName()}
                 <div  id='home-matches' className='row'>
                     {this.renderMatchCards()}
