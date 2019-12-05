@@ -14,7 +14,7 @@ class BrowseContainer extends Component {
      }
 
     componentDidMount() {
-        fetch(`http://localhost:3000/users/${this.props.currentUser.id}`, {
+        fetch(`http://petsmatch-backend.herokuapp.com/users/${this.props.currentUser.id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem("jwt")
@@ -41,7 +41,7 @@ class BrowseContainer extends Component {
     }
 
     handleClick = (event, id) => {
-        fetch(`http://localhost:3000/profile/${id}`, {
+        fetch(`http://petsmatch-backend.herokuapp.com/profile/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem("jwt")
@@ -68,7 +68,7 @@ class BrowseContainer extends Component {
     }
 
     createMatch = (id) => {
-        fetch(`http://localhost:3000/matches/`, {
+        fetch(`http://petsmatch-backend.herokuapp.com/matches/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ class BrowseContainer extends Component {
     }
 
     deleteMatch = (id) => {
-        fetch('http://localhost:3000/matches/', {
+        fetch('http://petsmatch-backend.herokuapp.com/matches/', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

@@ -33,7 +33,7 @@ class ChatContainer extends Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:3000/chats/${this.state.currentMessage.user_id}`, {
+        fetch(`http://petsmatch-backend.herokuapp.com/chats/${this.state.currentMessage.user_id}`, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("jwt")
             }
@@ -58,7 +58,7 @@ class ChatContainer extends Component {
     
     sendChatMessage = (socket, event) => {
         event.preventDefault()
-        fetch('http://localhost:3000/messages', {
+        fetch('http://petsmatch-backend.herokuapp.com/messages', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ class ChatContainer extends Component {
     };
 
     fetchChatMessages = (chat_id) => {
-        fetch(`http://localhost:3000/chat/${chat_id}`, {
+        fetch(`http://petsmatch-backend.herokuapp.com/chat/${chat_id}`, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("jwt")
             }
@@ -126,7 +126,7 @@ class ChatContainer extends Component {
     };
 
     fetchMatches = () => {
-        fetch(`http://localhost:3000/matches/${this.state.currentMessage.user_id}`, {
+        fetch(`http://petsmatch-backend.herokuapp.com/matches/${this.state.currentMessage.user_id}`, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("jwt")
             }
@@ -141,7 +141,7 @@ class ChatContainer extends Component {
     };
 
     findOrCreateNewChatFromMatchClick = (key) => {
-        fetch('http://localhost:3000/chats', {
+        fetch('http://petsmatch-backend.herokuapp.com/chats', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

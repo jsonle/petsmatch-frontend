@@ -18,7 +18,7 @@ class HomeContainer extends Component {
     }
 
     fetchCurrentUser = () => {
-        fetch(`http://localhost:3000/profile/${this.props.currentUser.id}`, {
+        fetch(`http://petsmatch-backend.herokuapp.com/profile/${this.props.currentUser.id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem("jwt")

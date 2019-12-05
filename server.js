@@ -27,7 +27,12 @@ io.on('connection', function(socket){
       socket.join(room);
     });
     socket.on('sendMessage', (message) => {
-      io.sockets.in(`chat_id_${message.chat_id}`).emit('receiveMessage', chatMessage(message.user_id, message.text, message.chat_id));
+      try{
+        io.sockets.in(`chat_id_${message.chat_id}`).emit('receiveMessage', chatMessage(message.user_id, message.text, message.chat_id));
+
+      } catch(e) {
+        console.log('error', e)
+      }
       });
     socket.on('disconnect', function(){});
 });
